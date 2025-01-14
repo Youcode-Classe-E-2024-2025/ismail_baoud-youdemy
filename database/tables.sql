@@ -22,7 +22,7 @@ CREATE TABLE courses (
                          courseID int AUTO_INCREMENT PRIMARY KEY,
                          title varchar(255) NOT NULL,
                          description varchar(255) NOT NULL,
-                         content varchar(255) NOT NULL,
+                         --content varchar(255) NOT NULL,
                          currentDate date NOT NULL,
                          status ENUM('active', 'On hold', 'deactivate') NOT NULL,
                          categoryID int,

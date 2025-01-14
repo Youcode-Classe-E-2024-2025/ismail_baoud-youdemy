@@ -1,5 +1,4 @@
 <?php
-// src/controllers/ControllerRouter.php
 
 declare(strict_types=1);
 
@@ -16,9 +15,8 @@ class ControllerRouter {
             'middlewares' => []
         ];
     }
-
     // Normalize the URL path
-    private function normalizePath(string $path): string {
+    private static function normalizePath(string $path): string {
         $path = trim($path, '/');
         $path = "/{$path}/";
         $path = preg_replace('#[/]{2,}#', '/', $path);

@@ -13,25 +13,25 @@
     </div>
     <div class="md:w-1/2 p-8">
         <h2 class="text-2xl font-bold mb-6 text-center">Sign Up</h2>
-        <form method="post" action="/admin/dashboard">
+        <form method="post" action="/controller/signup">
             <div class="flex mb-4">
                 <div class="w-1/2 pr-2">
                     <label class="block text-gray-700 mb-2" for="first_name">First Name:</label>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" id="first_name" name="first_name" required>
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" id="first_name" name="firstName" required>
                 </div>
                 <div class="w-1/2 pl-2">
                     <label class="block text-gray-700 mb-2" for="last_name">Last Name:</label>
-                    <input class="p-2 w-full border border-gray-300 rounded" type="text" id="last_name" name="last_name" required>
+                    <input class="p-2 w-full border border-gray-300 rounded" type="text" id="last_name" name="lastName" required>
                 </div>
             </div>
             <label class="block text-gray-700 mb-2" for="email">Email:</label>
             <input class="mb-4 p-2 w-full border border-gray-300 rounded" type="email" id="email" name="email" required>
             <label class="block text-gray-700 mb-2" for="phone">Phone:</label>
-            <input class="mb-4 p-2 w-full border border-gray-300 rounded" type="tel" id="phone" name="phone" required>
+            <input class="mb-4 p-2 w-full border border-gray-300 rounded" type="tel" id="phone" name="phoneNumber" required>
             <label class="block text-gray-700 mb-2" for="password">Password:</label>
             <input class="mb-4 p-2 w-full border border-gray-300 rounded" type="password" id="password" name="password" required>
             <label class="block text-gray-700 mb-2" for="confirm_password">Confirm Password:</label>
-            <input class="mb-4 p-2 w-full border border-gray-300 rounded" type="password" id="confirm_password" name="confirm_password" required>
+            <input class="mb-4 p-2 w-full border border-gray-300 rounded" type="password" id="confirm_password" name="confirmPassword" required>
             <label class="block text-gray-700 mb-2">I am a:</label>
             <div class="flex items-center mb-4">
                 <input type="radio" id="student" name="role" value="student" class="mr-2">
@@ -44,7 +44,7 @@
             <button class="w-full bg-blue-500 text-white py-2 rounded hover:bg-blue-600" type="submit">Sign Up</button>
         </form>
         <div class="mt-4 text-center">
-            <a href="login.php" class="text-blue-500 hover:underline">Already have an account? Login</a>
+            <a href="/login" class="text-blue-500 hover:underline">Already have an account? Login</a>
         </div>
     </div>
 </div>
