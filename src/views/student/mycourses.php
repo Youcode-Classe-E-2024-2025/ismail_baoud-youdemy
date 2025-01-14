@@ -14,6 +14,7 @@
             <div class="space-x-6">
                 <a href="dashboard.php" class="text-gray-700 hover:text-blue-500">AllCourses</a>
                 <a href="mycourses.php" class="text-gray-700 hover:text-blue-500">MyCourses</a>
+                <a href="../connection/login.php" class="text-gray-700 hover:text-blue-500">Log out </a>
             </div>
         </div>
     </nav>
