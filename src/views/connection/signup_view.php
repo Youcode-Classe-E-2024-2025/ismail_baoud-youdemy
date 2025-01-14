@@ -1,18 +1,3 @@
-<?php
-// signup.php
-
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $first_name = $_POST['first_name'];
-    $last_name = $_POST['last_name'];
-    $email = $_POST['email'];
-    $phone = $_POST['phone'];
-    $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
-    $role = $_POST['role'];
-    // Add your signup logic here
-}
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
     <div class="md:w-1/2 p-8">
         <h2 class="text-2xl font-bold mb-6 text-center">Sign Up</h2>
-        <form method="POST" action="signup.php">
+        <form method="post" action="/admin/dashboard">
             <div class="flex mb-4">
                 <div class="w-1/2 pr-2">
                     <label class="block text-gray-700 mb-2" for="first_name">First Name:</label>

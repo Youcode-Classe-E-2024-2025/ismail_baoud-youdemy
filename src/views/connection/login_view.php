@@ -21,7 +21,7 @@
             <h2 class="text-2xl font-bold text-gray-800 mb-4 text-center">Sign in</h2>
             <p class="text-gray-600 text-center mb-6">Continue to Youdemy</p>
 
-            <form action="../home/home.php" method="POST">
+            <form action="/student/dashboard" method="post">
                 <!-- Email field -->
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2" for="email">Email</label>
@@ -53,7 +53,7 @@
 
             <!-- Register Link -->
             <div class="text-center text-gray-700 mt-4">
-                <a href="signup.php" class="text-blue-500 hover:text-blue-700">Create account</a>
+                <a href="/signup" class="text-blue-500 hover:text-blue-700">Create account</a>
             </div>
         </div>
     </div>

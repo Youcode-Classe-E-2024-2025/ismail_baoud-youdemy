@@ -12,9 +12,9 @@
         <div class="container mx-auto flex justify-between items-center">
             <a href="/" class="text-2xl font-bold text-gray-800">Youdemy</a>
             <div class="space-x-6">
-                <a href="dashboard.php" class="text-gray-700 hover:text-blue-500">AllCourses</a>
-                <a href="mycourses.php" class="text-gray-700 hover:text-blue-500">MyCourses</a>
-                <a href="../connection/login.php" class="text-gray-700 hover:text-blue-500">Log out </a>
+                <a href="/student/dashboard" class="text-gray-700 hover:text-blue-500">AllCourses</a>
+                <a href="#" class="text-gray-700 hover:text-blue-500">MyCourses</a>
+                <a href="/login" class="text-gray-700 hover:text-blue-500">Log out </a>
             </div>
         </div>
     </nav>

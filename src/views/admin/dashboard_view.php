@@ -17,9 +17,9 @@
                 <p class="text-gray-700 mb-2">Total Users: <span class="font-bold">150</span></p>
                 <p class="text-gray-700 mb-2">Pending Signups: <span class="font-bold">10</span></p>
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="showUserManagement()">View User Management</button>
-                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Activate All</button>
+                <!-- <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Activate All</button>
                 <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Suspend All</button>
-                <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Delete All</button>
+                <button class="bg-yellow-500 hover:bg-yellow-700 text-white font-bold py-2 px-4 rounded">Delete All</button> -->
             </div>
             <div class="bg-white shadow-lg rounded-lg p-6">
                 <h2 class="font-bold text-lg mb-2">Content Management</h2>
@@ -35,10 +35,46 @@
                 <p class="text-gray-700 mb-2">Total Pending Requests: <span class="font-bold">5</span></p>
                 <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded">Validate All</button>
                 <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">Reject All</button>
+                <table>
+                <table class="min-w-full bg-white shadow-lg rounded-lg">
+
+                        <tr class="bg-gray-200">
+                            <th class="py-2 px-4">Name</th>
+                            <th class="py-2 px-4">Email</th>
+                            <th class="py-2 px-4">Status</th>
+                            <th class="py-2 px-4">action</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                    <tr>
+                            <td class="border py-2 px-4">Alice Johnson</td>
+                            <td class="border py-2 px-4">alice@example.com</td>
+                            <td class="border py-2 px-4">pending</td>
+
+                            <td class="border py-2 px-4">
+                                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded" onclick="activateUser('alice@example.com')">Activate</button>
+                                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" onclick="banUser('alice@example.com')">Ban</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border py-2 px-4">Jane Smith</td>
+                            <td class="border py-2 px-4">jane@example.com</td>
+                            <td class="border py-2 px-4">Pending</td> 
+                            <td class="border py-2 px-4">
+                                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded" onclick="activateUser('alice@example.com')">Activate</button>
+                                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" onclick="banUser('alice@example.com')">Ban</button>
+                            </td>
+
+
+                        </tr>
+                    </tbody>
+                </table>
+                </table>
             </div>
         </div>
 
-        <div id="user-management" class="hidden">
+        <div id="user-management" class="hidden mb-5">
             <h2 class="font-bold text-2xl mb-4">User Management</h2>
             <div class="mb-4">
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="showTable('all')">All Users</button>
@@ -54,7 +90,6 @@
                             <th class="py-2 px-4">Name</th>
                             <th class="py-2 px-4">Email</th>
                             <th class="py-2 px-4">Status</th>
-                            <th class="py-2 px-4">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -62,16 +97,12 @@
                             <td class="border py-2 px-4">John Doe</td>
                             <td class="border py-2 px-4">john@example.com</td>
                             <td class="border py-2 px-4">Active</td>
-                            <td class="border py-2 px-4">N/A</td>
                         </tr>
                         <tr>
                             <td class="border py-2 px-4">Jane Smith</td>
                             <td class="border py-2 px-4">jane@example.com</td>
                             <td class="border py-2 px-4">Pending</td>
-                            <td class="border py-2 px-4">
-                                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 rounded" onclick="activateUser('jane@example.com')">Activate</button>
-                                <button class="bg-red-500 hover:bg-red-700 text-white font-bold py-1 px-2 rounded" onclick="banUser('jane@example.com')">Ban</button>
-                            </td>
+                            
                         </tr>
                     </tbody>
                 </table>
