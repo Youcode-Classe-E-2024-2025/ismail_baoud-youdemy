@@ -13,7 +13,7 @@
     </div>
     <div class="md:w-1/2 p-8">
         <h2 class="text-2xl font-bold mb-6 text-center">Sign Up</h2>
-        <form method="post" action="/controller/signup">
+        <form method="POST" action="/controller/signup">
             <div class="flex mb-4">
                 <div class="w-1/2 pr-2">
                     <label class="block text-gray-700 mb-2" for="first_name">First Name:</label>
