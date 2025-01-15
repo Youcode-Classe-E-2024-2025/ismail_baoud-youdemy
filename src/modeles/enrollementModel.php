@@ -1,10 +1,16 @@
 <?php
+namespace src\modeles;
 
-class znrollement {
-    private $date;
+use PDO;
+use config\DatabaseConnection;
+use src\classes\enrollement;
 
-    public function __construct($date) {
-        $this->date = $date;
+
+class enrollementModel {
+
+    private $db;
+    public function __construct(){
+        $this->db = DatabaseConnection::connect();
     }
 
     public function createEnrollment() {
