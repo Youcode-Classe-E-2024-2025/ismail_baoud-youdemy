@@ -1,11 +1,15 @@
-
 <?php
+namespace src\modeles;
 
-class category {
-    private $categoryName;
+use PDO;
+use config\DatabaseConnection;
+use src\classes\category;
 
-    public function __construct($categoryName) {
-        $this->categoryName = $categoryName;
+
+class categoryModel {
+    private $db;
+    public function __construct(){
+        $this->db = DatabaseConnection::connect();
     }
 
     public function categoryInsert() {
