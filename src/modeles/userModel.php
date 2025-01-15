@@ -1,53 +1,64 @@
 <?php
-error_reporting( E_ALL );
-ini_set( 'display_errors', 1 );
-class User{
-    private $firstName ;
 
-    private $lastName ;
-    private $email ;
-    private $password ;
-    private $phoneNumber ;
-    private $role ;
+namespace src\modeles;
 
-    private $status;
+use PDO;
+use config\DatabaseConnection;
+use src\classes\User;
 
-    public function __construct($firstName, $lastName, $email, $password, $phoneNumber, $role,$status){
-        $this->firstName = $firstName;
-        $this->lastName = $lastName;
-        $this->email = $email;
-        $this->password = $password;
-        $this->phoneNumber = $phoneNumber;
-        $this->role = $role;
-        $this->status = $status;
+
+class userModel{
+    private $db;
+    public function __construct(){
+        $this->db = DatabaseConnection::connect();
     }
 
-    public function signUp($db){
-        echo "hi";
+    public function signUp(User $obg){
         try {
-            $query = "INSERT INTO users (firstName, lastName, email, password, phoneNumber, role , status) VALUES (':firstName', ':lastName', ':email', ':password', ':phoneNumber', ':role' ,':status')";
-        $stmt = $db->prepare($query);
-        $stmt->bindParam(":firstName", $this->firstName);
-        $stmt->bindParam(":lastName", $this->lastName);
-        $stmt->bindParam(":email", $this->email);
-        $stmt->bindParam(":password", password_hash($this->password, PASSWORD_DEFAULT));
-        $stmt->bindParam(":phoneNumber", $this->phoneNumber);
-        $stmt->bindParam(":role", $this->role);
-        $stmt->bindParam(":status", $this->status);
-        $stmt->execute();
-        include_once "src/views/connection/login_view.php";
-        }catch (PDOException $e){
-            $err="Erreur lors de l'enregistrement" . $e->getMessage();
+            $query = "INSERT INTO users (firstName, lastName, email, password, phoneNumber, role, status) VALUES (:firstName, :lastName, :email, :password, :phoneNumber, :role, :status)";
+            $stmt = $this->db->prepare($query);
+            $passhash = password_hash($obg->__get("password"), PASSWORD_DEFAULT);
+            $firstName = $obg->__get("firstName"); 
+            $lastName = $obg->__get("lastName");
+            $email = $obg->__get("email");
+            $phone = $obg->__get("phoneNumber");
+            $role = $obg->__get("role");
+            $status =$obg->__get("status");
+            $stmt->bindParam('firstName', $firstName);
+            $stmt->bindParam('lastName', $lastName);
+            $stmt->bindParam('email', $email);
+            $stmt->bindParam('password', $passhash);
+            $stmt->bindParam('phoneNumber', $phone);
+            $stmt->bindParam('role', $role);
+            $stmt->bindParam('status', $status);
+            $stmt->execute();
+            include_once "src/views/connection/login_view.php";
+        } catch (PDOException $e) {
+            $err = "Erreur lors de l'enregistrement: " . $e->getMessage();
+            throw $e;
         }
-
-
-
     }
     public function login($email, $password){
 
+            $query= "SELECT email, password, role ,status from users where email = :email";
+            $stmt = $this->db->prepare( $query );
+            $stmt->bindparam( ':email', $email );
+            $stmt->execute();
+            return $stmt->fetch(PDO::FETCH_ASSOC);
+            
+            
     }
-
-    public function emailExists($email){
+    public function emailExists($db){
+        $query = "select email from users where email = :email";
+        $stmt = $db->prepare( $query );
+        $stmt->bindparam( ':email', $this->email );
+        $stmt->execute();
+        $isExist = $stmt->fetch(PDO::FETCH_ASSOC);
+        if($isExist){
+            return true;
+        }else{
+            return false;
+        }
 
     }
 
