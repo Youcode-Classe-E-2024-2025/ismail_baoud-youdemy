@@ -3,7 +3,8 @@
 namespace src\controllers;
 
 use config\DatabaseConnection;
-use src\modeles\User;
+use src\classes\User;
+use src\modeles\userModel;
 class signupController
 {
     private $db;
@@ -36,12 +37,14 @@ class signupController
             if ($role == "student") {
                 $status = "active";
                 $student = new User($firstName, $lastName, $email, $password, $phoneNumber, $role, $status);
-                $student->signUp($this->db);
+                $obj = new userModel();
+                $obj->signUp($student);
             } elseif ($role == "teacher") {
                 
                 $status = "On hold";
-                $student = new User($firstName, $lastName, $email, $password, $phoneNumber, $role, $status);
-                $student->signUp($this->db);
+                $teacher = new User($firstName, $lastName, $email, $password, $phoneNumber, $role, $status);
+                $obj = new userModel();
+                $obj->signUp($teacher);
             } else {
                 $err = "this role is not found";
                 return;
@@ -54,6 +57,4 @@ class signupController
     }
 }
 
-//$obj = new signupController();
-//$obj->signup();
 ?>
