@@ -1,19 +1,20 @@
 <?php
-error_reporting( E_ALL );
-ini_set( 'display_errors', 1 );
+
+namespace src\controllers;
+
+use config\DatabaseConnection;
+use src\modeles\User;
 class signupController
 {
     private $db;
-
+    
     public function connect()
     {
-        $connection = new DatabaseConnection();
-        $this->db = $connection->connect();
+        $this->db = DatabaseConnection::connect();
     }
-
+    
     public function signup()
     {
-        echo "hi";
         $this->connect();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $firstName = $_POST['firstName'];
@@ -30,13 +31,14 @@ class signupController
             if ($firstName == "" || $lastName == "" || $email == "" || $password == "" || $confirmPassword == "" || $phoneNumber == "") {
                 $err = "Please fill all the fields";
                 return;
-
+                
             }
-            if ($role == "Student") {
+            if ($role == "student") {
                 $status = "active";
                 $student = new User($firstName, $lastName, $email, $password, $phoneNumber, $role, $status);
                 $student->signUp($this->db);
             } elseif ($role == "teacher") {
+                
                 $status = "On hold";
                 $student = new User($firstName, $lastName, $email, $password, $phoneNumber, $role, $status);
                 $student->signUp($this->db);
@@ -46,6 +48,9 @@ class signupController
             }
 
         }
+    }
+    public function signup_view(){
+        require_once "src/views/connection/signup_view.php";
     }
 }
 
