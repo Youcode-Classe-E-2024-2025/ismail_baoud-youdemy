@@ -1,10 +1,16 @@
 <?php
+namespace src\modeles;
 
-class Teacher extends User{
+use PDO;
+use config\DatabaseConnection;
+use src\classes\teacher;
 
-    public function __construct($firstName, $lastName, $email, $password, $phoneNumber, $role = "teacher")
-    {
-        parent::__construct($firstName, $lastName, $email, $password, $phoneNumber, $role);
+
+class teacherModel{
+
+    private $db;
+    public function __construct(){
+        $this->db = DatabaseConnection::connect();
     }
 
     public function enrollementCourse(){
