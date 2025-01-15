@@ -1,10 +1,15 @@
 <?php
+namespace src\modeles;
 
-class tag {
-    private $tagName;
+use PDO;
+use config\DatabaseConnection;
+use src\classes\tag;
 
-    public function __construct($tagName) {
-        $this->tagName = $tagName;
+
+class tagModel {
+    private $db;
+    public function __construct(){
+        $this->db = DatabaseConnection::connect();
     }
 
     public function tagInsert() {
