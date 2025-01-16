@@ -2,7 +2,6 @@
 namespace src\controllers;
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
-use src\classes\User;
 use src\modeles\userModel;
 
 class loginController{
@@ -27,17 +26,18 @@ class loginController{
                     if($result["role"] == "student"){
                         
                         $_SESSION["role"] = "student";
-                        require_once "src/views/student/dashboard_view.php";
+                        header("location: /student/mycourses");
                     }
                     elseif($result["role"] == "teacher"){
                         if($result["status"] == "On hold"){
                             $_SESSION["role"] = "teacher";
                             $_SESSION["status"] = "On hold";
-                            require_once "src/views/teacher/panding_view.php";
+                            header("location: /teacher/dashboard/panding");
+                            
                         }elseif($result["status"] == "active"){
                             $_SESSION["role"] = "teacher";
                             $_SESSION["status"] = "active";
-                            require_once "src/views/teacher/dashboard_view.php";
+                            header("location: /teacher/dashboard");
                         }
                     }else{
                         $_SESSION["role"] = "admin";
