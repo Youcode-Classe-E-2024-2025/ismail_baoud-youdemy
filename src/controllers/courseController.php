@@ -9,7 +9,7 @@ class courseController{
         $tags = $_POST["tags"];
         $category = $_POST["category"];
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-
+            
             $targetDir = "uploads/";
             if (!is_dir($targetDir)) {
                 if (!mkdir($targetDir, 0777, true)) {
@@ -19,15 +19,15 @@ class courseController{
                 }
                 chmod($targetDir, 0777);
             }
-
+            
             error_log("POST data: " . print_r($_POST, true));
             error_log("FILES data: " . print_r($_FILES, true));
-
+            
             if (!isset($_FILES['content']) || empty($_FILES['content'])) {
                 echo "No file was uploaded or the upload failed.";
                 return;
             }
-
+            
             $videoFile = $_FILES['content'];
             $targetFilePath = $targetDir . basename($videoFile['name']);
             $uploadOk = 1;
@@ -40,10 +40,10 @@ class courseController{
             }
             
             if ($uploadOk && move_uploaded_file($videoFile['tmp_name'], $targetFilePath)) {
-               
-                    $obj = new course($title,$description,$targetFilePath,$category);
-                    $objet = new courseModel();
-                    $stmt = $objet->courseAdd($obj);
+                $id = $_SESSION["teacherID"];
+                $obj = new course($title,$description,$targetFilePath,$category);
+                $objet = new courseModel();
+                $stmt = $objet->courseAdd($obj,$id);
                     foreach($tags as $tag){
                        $objet->course_tags($tag,$stmt);
                     }
@@ -59,4 +59,29 @@ class courseController{
             
         }
     }
+    
+    public function deleteCourse(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $id = $_POST["dletedID"];
+            $obg = new courseModel();
+            $obg->courseDelete($id);
+            header('location: /teacher/dashboard');
+        }
+    }
+
+    public function updateCourse(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $title = $_POST["title"];
+            $description = $_POST["description"];
+            $id=$_POST["id"];
+            $obg = new courseModel();
+            
+            $obg->courseUpdate($id,$title,$description);
+            unset($_SESSION["title"]);
+            unset($_SESSION["description"]);
+            unset($_SESSION["courseID"]);
+            header('location: /teacher/dashboard');
+        }
+    }
+
 }
