@@ -39,8 +39,7 @@ class userModel{
         }
     }
     public function login($email, $password){
-
-            $query= "SELECT email, password, role ,status from users where email = :email";
+            $query= "SELECT * from users where email = :email";
             $stmt = $this->db->prepare( $query );
             $stmt->bindparam( ':email', $email );
             $stmt->execute();
