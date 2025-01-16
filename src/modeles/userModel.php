@@ -23,7 +23,7 @@ class userModel{
             $email = $obg->__get("email");
             $phone = $obg->__get("phoneNumber");
             $role = $obg->__get("role");
-            $status =$obg->__get("status");
+            $status = $obg->__get("status");
             $stmt->bindParam('firstName', $firstName);
             $stmt->bindParam('lastName', $lastName);
             $stmt->bindParam('email', $email);
