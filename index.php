@@ -42,6 +42,9 @@ $controllerRouter->add('GET', '/admin/dashboard', [adminController::class, 'dash
 $controllerRouter->add('POST', '/teacher/course/addCourse', [courseController::class, 'addCourse']);
 $controllerRouter->add('POST', '/dashboard/category', [adminController::class, 'addCategory']);
 $controllerRouter->add('POST', '/dashboard/tag', [adminController::class, 'addTag']);
+$controllerRouter->add('POST', '/teacher/course/delete', [courseController::class, 'deleteCourse']);
+$controllerRouter->add('POST', '/teacher/course/update', [courseController::class, 'updateCourse']);
+
 
 $controllerRouter->dispatch($_SERVER['REQUEST_URI']);
 ?>
