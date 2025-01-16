@@ -25,11 +25,16 @@ class categoryModel {
         }
         
     }
-    public function categoryDelete() {
-
+    public function categoryDelete($id) {
+        $query = "UPDATE categorys set status = 'deactivate' where categoryID = $id";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
     }
     public function categoryList() {
-
+        $query = "SELECT * from categorys where status = 'active";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }
