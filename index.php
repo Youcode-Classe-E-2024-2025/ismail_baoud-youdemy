@@ -5,14 +5,17 @@ ini_set('display_errors', 1);
 session_start();
 require_once 'vendor/autoload.php';
 require_once "autoloader.php";
+require_once "debuging/debuging.php";
 require_once "config/databaseConnection.php";  
 autoloader::register();
 
 use src\controllers\ControllerRouter;
 use src\controllers\loginController;
 use src\controllers\studentController;
+use src\controllers\teacherController;
 use src\controllers\adminController;
 use src\controllers\signupController;
+use src\controllers\courseController;
 use src\modeles\User;
 
 use config\DatabaseConnection;
@@ -25,15 +28,20 @@ try {
 
 $controllerRouter = new ControllerRouter();
 
+$controllerRouter->add('GET', '/', [loginController::class, 'logout']);
 $controllerRouter->add('GET', '/login', [loginController::class, 'login']);
 $controllerRouter->add('POST', '/login/controller', [loginController::class, 'login_controller']);
 $controllerRouter->add('GET', '/signup', [signupController::class, 'signup_view']);
-$controllerRouter->add('GET', '/', [loginController::class, 'logout']);
+$controllerRouter->add('POST', '/controller/signup', [signupController::class, 'signup']);
 $controllerRouter->add('GET', '/logout', [loginController::class, 'logout']);
 $controllerRouter->add('GET', '/student/dashboard', [studentController::class, 'dashboard']);
 $controllerRouter->add('GET', '/student/mycourses', [studentController::class, 'mycourses']);
+$controllerRouter->add('GET', '/teacher/dashboard', [teacherController::class, 'dashboard']);
+$controllerRouter->add('GET', '/teacher/dashboard/panding', [teacherController::class, 'panding']);
 $controllerRouter->add('GET', '/admin/dashboard', [adminController::class, 'dashboard']);
-$controllerRouter->add('POST', '/controller/signup', [signupController::class, 'signup']);
+$controllerRouter->add('POST', '/teacher/course/addCourse', [courseController::class, 'addCourse']);
+$controllerRouter->add('POST', '/dashboard/category', [adminController::class, 'addCategory']);
+$controllerRouter->add('POST', '/dashboard/tag', [adminController::class, 'addTag']);
 
 $controllerRouter->dispatch($_SERVER['REQUEST_URI']);
 ?>
