@@ -22,9 +22,9 @@ CREATE TABLE courses (
                          courseID int AUTO_INCREMENT PRIMARY KEY,
                          title varchar(255) NOT NULL,
                          description varchar(255) NOT NULL,
-                         --content varchar(255) NOT NULL,
-                         currentDate date NOT NULL,
+                        --  currentDate date NOT NULL,
                          status ENUM('active', 'On hold', 'deactivate') NOT NULL,
+                         content varchar(255) NOT NULL,
                          categoryID int,
                          FOREIGN KEY (categoryID) REFERENCES categorys(categoryID)
 );
@@ -36,7 +36,6 @@ CREATE TABLE tags (
                       status ENUM('active', 'deactivate') NOT NULL
 );
 
--- Create the course_tags junction table
 CREATE TABLE course_tags (
                              tagID int,
                              courseID int,

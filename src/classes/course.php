@@ -6,19 +6,14 @@ class course {
     private $description;
 
     private $content;
-    private $tagId;
 
     private $categoryId;
 
-    private $date;
-
-    function __construct($title, $description, $content, $tagId, $categoryId, $date) {
+    function __construct($title, $description, $content, $categoryId) {
         $this->title = $title;
         $this->description = $description;
         $this->content = $content;
-        $this->tagId = $tagId;
         $this->categoryId = $categoryId;
-        $this->date = $date;
     }
 
     public function __get($name){

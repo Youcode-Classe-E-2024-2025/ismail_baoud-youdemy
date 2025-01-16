@@ -1,4 +1,5 @@
 <?php
+namespace src\controllers;
 class studentController{
     public function dashboard(){
         include_once  "src/views/student/dashboard_view.php";

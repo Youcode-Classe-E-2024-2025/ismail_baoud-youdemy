@@ -5,32 +5,47 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="488e3577-d50c-4bb4-b2a6-84a927be46a9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.htacces" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/config/databaseConnection.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/databaseConnection.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/database/tables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/tables.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/Router.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/Router.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/category.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/category.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/courses.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/classes/tag.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/tag.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/Router.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/courseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/courseController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/loginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/loginController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/controllers/pathsList.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/pathsList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/signupController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/signupController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modeles/adminModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/modeles/adminModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modeles/studentModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/modeles/studentModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modeles/teacherModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/modeles/teacherModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modeles/userModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/modeles/userModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/connection/signup_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/connection/signup_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/studentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/studentController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/controllers/teacherController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/teacherController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modeles/User.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modeles/courseModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/modeles/courseModel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/modeles/coursesModel.php" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/admin/dashboard_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/dashboard_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/connection/login_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/connection/login_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/student/dashboard_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/student/dashboard_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/student/mycourses_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/student/mycourses_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/teacher/dashboard_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/teacher/dashboard_view.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uploads/upload.php" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/upload.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" synchronizationState="SYNCHRONIZE">
+    <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/bin/php" />
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="/bin/php">
+    <include_path>
+      <path value="$PROJECT_DIR$/vendor/composer" />
+    </include_path>
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 2
 }</component>
@@ -39,21 +54,21 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "PHP Script.testing.php.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "main",
-    "last_opened_file_path": "/var/www/youdemy/src/views/student",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;PHP Script.testing.php.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/var/www/youdemy/src/views/student&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/src/views/student" />
@@ -77,7 +92,11 @@
       <option name="presentableId" value="Default" />
       <updated>1736766915466</updated>
       <workItem from="1736766916589" duration="14694000" />
-      <workItem from="1736880753519" duration="6600000" />
+      <workItem from="1736880753519" duration="7223000" />
+      <workItem from="1736927859608" duration="2938000" />
+      <workItem from="1736949546746" duration="596000" />
+      <workItem from="1736975092112" duration="737000" />
+      <workItem from="1737017722075" duration="5013000" />
     </task>
     <servers />
   </component>

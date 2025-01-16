@@ -3,6 +3,7 @@ namespace src\classes;
 
 class category {
     private $categoryName;
+    private $status = "active";
 
     public function __construct($categoryName) {
         $this->categoryName = $categoryName;

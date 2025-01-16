@@ -35,6 +35,7 @@ class loginController{
                             header("location: /teacher/dashboard/panding");
                             
                         }elseif($result["status"] == "active"){
+                            $_SESSION["teacherID"] = $result["userID"];
                             $_SESSION["role"] = "teacher";
                             $_SESSION["status"] = "active";
                             header("location: /teacher/dashboard");

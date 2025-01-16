@@ -3,6 +3,7 @@ namespace src\classes;
 
 class tag {
     private $tagName;
+    private $status = 'active';
 
     public function __construct($tagName) {
         $this->tagName = $tagName;

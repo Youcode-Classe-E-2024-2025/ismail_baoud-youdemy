@@ -1,27 +1,28 @@
 <?php
 
+namespace config;
+
+use PDO;
+use PDOException;
 
 class DatabaseConnection {
-    private $host = "localhost";
-    private $user = "root";
-    private $pass = "baoud";
+    private static $host = "localhost";
+    private static $user = "root";
+    private static $pass = "baoud";
+    private static $dbName = "youdemy";
 
-    private $dbName = "youdemy";
-    private $conn;
-
-    public function connect()
+    public static function connect()
     {
         try {
-            $this->conn = new PDO(
-                "mysql:host=" . $this->host . ";dbname=" . $this->dbName,
-                $this->user,
-                $this->pass
+            $conn = new PDO(
+                "mysql:host=" . self::$host . ";dbname=" . self::$dbName,
+                self::$user,
+                self::$pass
             );
-            return $this->conn;
-
+            $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $conn;
         } catch (PDOException $e) {
-            die("Connection Error: " . $e->getMessage());
+            throw $e;
         }
     }
 }
-

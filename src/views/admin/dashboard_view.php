@@ -15,8 +15,7 @@
             <a href="/" class="text-2xl font-bold text-gray-800">Youdemy</a>
             <div class="space-x-6">
                 <a href="#" class="text-gray-700 hover:text-blue-500">Dashboard</a>
-                <a href="/login" class="text-gray-700 hover:text-blue-500">Log out </a>
-
+                <a href="/logout" class="text-gray-700 hover:text-blue-500">Log out </a>
             </div>
         </div>
     </nav>
@@ -87,14 +86,14 @@
 
         <div id="bulk-insert-tags" class="hidden bg-white shadow-lg rounded-lg p-6 mb-8">
             <h2 class="font-bold text-2xl mb-4 text-purple-600">Bulk Insert Tags</h2>
-            <form id="add-tags-form" class="mb-4">
+            <form action="/dashboard/tag" method="post" id="" class="mb-4">
                 <label for="tags" class="block mb-2">Add Tags:</label>
-                <input type="text" id="tags" class="border rounded p-2 w-full" placeholder="Enter tags separated by commas">
+                <input type="text" name="tags" id="tags" class="border rounded p-2 w-full" placeholder="Enter tags separated by commas">
                 <button type="submit" class="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded mt-2">Add Tags</button>
             </form>
-            <form id="add-category-form">
+            <form action="/dashboard/category" method="post" id="add-category-form">
                 <label for="category" class="block mb-2">Add Category:</label>
-                <input type="text" id="category" class="border rounded p-2 w-full" placeholder="Enter category name">
+                <input type="text" name="category" id="category" class="border rounded p-2 w-full" placeholder="Enter category name">
                 <button type="submit" class="bg-green-600 hover:bg-green-800 text-white font-bold py-2 px-4 rounded mt-2">Add Category</button>
             </form>
             <button class="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mt-4" onclick="toggleBulkInsertTags()">Close</button>
@@ -111,25 +110,7 @@
                         <th class="py-3 px-4">Action</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        <td class="border py-2 px-4">Alice Johnson</td>
-                        <td class="border py-2 px-4">alice@example.com</td>
-                        <td class="border py-2 px-4">Active</td>
-                        <td class="border py-2 px-4">
-                            <button class="bg-green-600 hover:bg-green-800 text-white font-bold py-1 px-2 rounded" onclick="activateUser('alice@example.com')">Activate</button>
-                            <button class="bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-2 rounded" onclick="banUser('alice@example.com')">Ban</button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="border py-2 px-4">Jane Smith</td>
-                        <td class="border py-2 px-4">jane@example.com</td>
-                        <td class="border py-2 px-4">Pending</td>
-                        <td class="border py-2 px-4">
-                            <button class="bg-green-600 hover:bg-green-800 text-white font-bold py-1 px-2 rounded" onclick="activateUser('jane@example.com')">Activate</button>
-                            <button class="bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-2 rounded" onclick="banUser('jane@example.com')">Ban</button>
-                        </td>
-                    </tr>
+                <tbody id="userTableBody">
                 </tbody>
             </table>
             <button class="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mt-4" onclick="toggleUserTable()">Close</button>
@@ -225,18 +206,7 @@
                 const table = document.getElementById('user-table');
                 table.classList.toggle('hidden');
             }
-            function showUserOptions() {
-                const options = document.getElementById('user-options');
-                options.classList.toggle('hidden');
-            }
-            function manageContent() {
-                const manageContentDiv = document.getElementById('manage-content');
-                manageContentDiv.classList.toggle('hidden');
-            }
-            function bulkInsertTags() {
-                const bulkInsertDiv = document.getElementById('bulk-insert-tags');
-                bulkInsertDiv.classList.toggle('hidden');
-            }
+
             function showAllUsers() {
                 document.getElementById('user-table').classList.remove('hidden');
                 document.getElementById('user-table').innerHTML = `
@@ -250,58 +220,15 @@
                                 <th class="py-3 px-4">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="border py-2 px-4">Alice Johnson</td>
-                                <td class="border py-2 px-4">alice@example.com</td>
-                                <td class="border py-2 px-4">Active</td>
-                                <td class="border py-2 px-4">
-                                    <button class="bg-green-600 hover:bg-green-800 text-white font-bold py-1 px-2 rounded" onclick="activateUser('alice@example.com')">Activate</button>
-                                    <button class="bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-2 rounded" onclick="banUser('alice@example.com')">Ban</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="border py-2 px-4">Jane Smith</td>
-                                <td class="border py-2 px-4">jane@example.com</td>
-                                <td class="border py-2 px-4">Pending</td>
-                                <td class="border py-2 px-4">
-                                    <button class="bg-green-600 hover:bg-green-800 text-white font-bold py-1 px-2 rounded" onclick="activateUser('jane@example.com')">Activate</button>
-                                    <button class="bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-2 rounded" onclick="banUser('jane@example.com')">Ban</button>
-                                </td>
-                            </tr>
+                        <tbody id="userTableBody">
                         </tbody>
                     </table>
                     <button class="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mt-4" onclick="toggleUserTable()">Close</button>
                 `;
+                // Here you would typically fetch users from the backend
+                fetchUsers('all');
             }
-            function showPendingUsers() {
-                document.getElementById('user-table').classList.remove('hidden');
-                document.getElementById('user-table').innerHTML = `
-                    <h2 class="font-bold text-2xl mb-4 text-purple-600">Pending Users</h2>
-                    <table class="min-w-full bg-white shadow-lg rounded-lg">
-                        <thead>
-                            <tr class="bg-gray-200">
-                                <th class="py-3 px-4">Name</th>
-                                <th class="py-3 px-4">Email</th>
-                                <th class="py-3 px-4">Status</th>
-                                <th class="py-3 px-4">Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td class="border py-2 px-4">Jane Smith</td>
-                                <td class="border py-2 px-4">jane@example.com</td>
-                                <td class="border py-2 px-4">Pending</td>
-                                <td class="border py-2 px-4">
-                                    <button class="bg-green-600 hover:bg-green-800 text-white font-bold py-1 px-2 rounded" onclick="activateUser('jane@example.com')">Activate</button>
-                                    <button class="bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-2 rounded" onclick="banUser('jane@example.com')">Ban</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                    <button class="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mt-4" onclick="toggleUserTable()">Close</button>
-                `;
-            }
+
             function showActiveUsers() {
                 document.getElementById('user-table').classList.remove('hidden');
                 document.getElementById('user-table').innerHTML = `
@@ -315,21 +242,37 @@
                                 <th class="py-3 px-4">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="border py-2 px-4">Alice Johnson</td>
-                                <td class="border py-2 px-4">alice@example.com</td>
-                                <td class="border py-2 px-4">Active</td>
-                                <td class="border py-2 px-4">
-                                    <button class="bg-green-600 hover:bg-green-800 text-white font-bold py-1 px-2 rounded" onclick="activateUser('alice@example.com')">Activate</button>
-                                    <button class="bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-2 rounded" onclick="banUser('alice@example.com')">Ban</button>
-                                </td>
-                            </tr>
+                        <tbody id="userTableBody">
                         </tbody>
                     </table>
                     <button class="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mt-4" onclick="toggleUserTable()">Close</button>
                 `;
+                // Here you would typically fetch active users from the backend
+                fetchUsers('active');
             }
+
+            function showPendingUsers() {
+                document.getElementById('user-table').classList.remove('hidden');
+                document.getElementById('user-table').innerHTML = `
+                    <h2 class="font-bold text-2xl mb-4 text-purple-600">Pending Users</h2>
+                    <table class="min-w-full bg-white shadow-lg rounded-lg">
+                        <thead>
+                            <tr class="bg-gray-200">
+                                <th class="py-3 px-4">Name</th>
+                                <th class="py-3 px-4">Email</th>
+                                <th class="py-3 px-4">Status</th>
+                                <th class="py-3 px-4">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody id="userTableBody">
+                        </tbody>
+                    </table>
+                    <button class="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mt-4" onclick="toggleUserTable()">Close</button>
+                `;
+                // Here you would typically fetch pending users from the backend
+                fetchUsers('pending');
+            }
+
             function showBannedUsers() {
                 document.getElementById('user-table').classList.remove('hidden');
                 document.getElementById('user-table').innerHTML = `
@@ -343,46 +286,175 @@
                                 <th class="py-3 px-4">Action</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="border py-2 px-4">Bob Johnson</td>
-                                <td class="border py-2 px-4">bob@example.com</td>
-                                <td class="border py-2 px-4">Banned</td>
-                                <td class="border py-2 px-4">
-                                    <button class="bg-green-600 hover:bg-green-800 text-white font-bold py-1 px-2 rounded" onclick="activateUser('bob@example.com')">Activate</button>
-                                    <button class="bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-2 rounded" onclick="banUser('bob@example.com')">Ban</button>
-                                </td>
-                            </tr>
+                        <tbody id="userTableBody">
                         </tbody>
                     </table>
                     <button class="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mt-4" onclick="toggleUserTable()">Close</button>
                 `;
+                // Here you would typically fetch banned users from the backend
+                fetchUsers('banned');
             }
-            function activateUser(email) {
-                console.log(`Activating user ${email}`);
-                // Implement logic to activate user
+
+            async function fetchUsers(status) {
+                try {
+                    const response = await fetch(`/api/users?status=${status}`);
+                    const users = await response.json();
+                    const tableBody = document.getElementById('userTableBody');
+                    tableBody.innerHTML = users.map(user => `
+                        <tr>
+                            <td class="border py-2 px-4">${user.name}</td>
+                            <td class="border py-2 px-4">${user.email}</td>
+                            <td class="border py-2 px-4">${user.status}</td>
+                            <td class="border py-2 px-4">
+                                ${user.status !== 'active' ? 
+                                    `<button class="bg-green-600 hover:bg-green-800 text-white font-bold py-1 px-2 rounded mr-2" onclick="activateUser('${user.email}')">Activate</button>` : ''}
+                                ${user.status !== 'banned' ? 
+                                    `<button class="bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-2 rounded" onclick="banUser('${user.email}')">Ban</button>` : ''}
+                                ${user.status === 'banned' ? 
+                                    `<button class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-1 px-2 rounded" onclick="unbanUser('${user.email}')">Unban</button>` : ''}
+                            </td>
+                        </tr>
+                    `).join('');
+                } catch (error) {
+                    console.error('Error fetching users:', error);
+                }
             }
-            function banUser(email) {
-                console.log(`Banning user ${email}`);
-                // Implement logic to ban user
+
+            async function activateUser(email) {
+                try {
+                    const response = await fetch('/api/users/activate', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email })
+                    });
+                    if (response.ok) {
+                        // Refresh the current user list
+                        const currentTable = document.querySelector('#user-table h2').textContent;
+                        const status = currentTable.toLowerCase().split(' ')[0];
+                        fetchUsers(status);
+                    }
+                } catch (error) {
+                    console.error('Error activating user:', error);
+                }
             }
-            function viewStatistics() {
-                const statistics = document.getElementById('statistics');
-                statistics.classList.remove('hidden');
+
+            async function banUser(email) {
+                try {
+                    const response = await fetch('/api/users/ban', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email })
+                    });
+                    if (response.ok) {
+                        // Refresh the current user list
+                        const currentTable = document.querySelector('#user-table h2').textContent;
+                        const status = currentTable.toLowerCase().split(' ')[0];
+                        fetchUsers(status);
+                    }
+                } catch (error) {
+                    console.error('Error banning user:', error);
+                }
             }
-            function toggleStatistics() {
-                const statistics = document.getElementById('statistics');
-                statistics.classList.toggle('hidden');
+
+            async function unbanUser(email) {
+                try {
+                    const response = await fetch('/api/users/unban', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ email })
+                    });
+                    if (response.ok) {
+                        // Refresh the current user list
+                        const currentTable = document.querySelector('#user-table h2').textContent;
+                        const status = currentTable.toLowerCase().split(' ')[0];
+                        fetchUsers(status);
+                    }
+                } catch (error) {
+                    console.error('Error unbanning user:', error);
+                }
             }
+
+            function manageContent() {
+                document.getElementById('manage-content').classList.remove('hidden');
+                document.getElementById('bulk-insert-tags').classList.add('hidden');
+                document.getElementById('user-table').classList.add('hidden');
+                document.getElementById('statistics').classList.add('hidden');
+            }
+
             function toggleManageContent() {
-                const manageContentDiv = document.getElementById('manage-content');
-                manageContentDiv.classList.toggle('hidden');
+                document.getElementById('manage-content').classList.toggle('hidden');
             }
+
+            function bulkInsertTags() {
+                document.getElementById('bulk-insert-tags').classList.remove('hidden');
+                document.getElementById('manage-content').classList.add('hidden');
+                document.getElementById('user-table').classList.add('hidden');
+                document.getElementById('statistics').classList.add('hidden');
+            }
+
             function toggleBulkInsertTags() {
-                const bulkInsertDiv = document.getElementById('bulk-insert-tags');
-                bulkInsertDiv.classList.toggle('hidden');
+                document.getElementById('bulk-insert-tags').classList.toggle('hidden');
             }
+
+            function viewStatistics() {
+                document.getElementById('statistics').classList.remove('hidden');
+                document.getElementById('manage-content').classList.add('hidden');
+                document.getElementById('bulk-insert-tags').classList.add('hidden');
+                document.getElementById('user-table').classList.add('hidden');
+            }
+
+            function toggleStatistics() {
+                document.getElementById('statistics').classList.toggle('hidden');
+            }
+
+            // Add event listeners for the forms
+            document.getElementById('add-tags-form').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const tags = document.getElementById('tags').value.split(',').map(tag => tag.trim());
+                try {
+                    const response = await fetch('/api/tags/bulk', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ tags })
+                    });
+                    if (response.ok) {
+                        document.getElementById('tags').value = '';
+                        alert('Tags added successfully!');
+                    }
+                } catch (error) {
+                    console.error('Error adding tags:', error);
+                    alert('Error adding tags. Please try again.');
+                }
+            });
+
+            document.getElementById('add-category-form').addEventListener('submit', async function(e) {
+                e.preventDefault();
+                const category = document.getElementById('category').value.trim();
+                try {
+                    const response = await fetch('/api/categories', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ name: category })
+                    });
+                    if (response.ok) {
+                        document.getElementById('category').value = '';
+                        alert('Category added successfully!');
+                    }
+                } catch (error) {
+                    console.error('Error adding category:', error);
+                    alert('Error adding category. Please try again.');
+                }
+            });
         </script>
-    </div>
-</body>
+    </body>
 </html>

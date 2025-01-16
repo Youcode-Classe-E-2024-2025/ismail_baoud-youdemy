@@ -14,7 +14,7 @@
             <div class="space-x-6">
                 <a href="#" class="text-gray-700 hover:text-blue-500">AllCourses</a>
                 <a href="/student/mycourses" class="text-gray-700 hover:text-blue-500">MyCourses</a>
-                <a href="/login" class="text-gray-700 hover:text-blue-500">Log out </a>
+                <a href="/logout" class="text-gray-700 hover:text-blue-500">Log out </a>
 
             </div>
         </div>
