@@ -14,11 +14,22 @@ class courseModel {
 
     public function courseAdd(course $obj){
         try{
-
-            $query = "INSERT into courses (title,description,content,categoryId) values (?,?,?,?)";
+session_start();
+            $query = "INSERT into courses (title,description,content,categoryId,teacherID) values (?,?,?,?,?)";
             $stmt = $this->db->prepare($query);
-            $stmt->execute([$obj->__get("title"),$obj->__get("description"),$obj->__get("content"),$obj->__get("categoryId")]);
-            return true;
+            $stmt->execute([$obj->__get("title"),$obj->__get("description"),$obj->__get("content"),$obj->__get("categoryId"),$_SESSION["teacherID"]]);
+            return $this->db->lastInsertId();
+        }catch(exeption $e){
+            return false;
+        }
+    }
+
+    public function course_tags($tagID, $courseID){
+        try{
+            $query = "INSERT INTO course_tags (tagID , courseID) values (?,?)";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute([$tagID, $courseID]);
+        return true;
         }catch(exeption $e){
             return false;
         }
@@ -28,12 +39,16 @@ class courseModel {
 
     }
 
+
     public function courseUpdate(){
 
     }
 
     public function courseList(){
-
+        $query = "SELECT * FROM courses";
+        $stmt = $this->db->query($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function totalCourses(){
@@ -44,7 +59,7 @@ class courseModel {
 
     }
 
-    public function courseByid(){
-
+    public function LastIdCours(){
+        
     }
 }
