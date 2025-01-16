@@ -25,8 +25,8 @@ class tagModel {
         }
         
     }
-    public function tagDelete() {
-
+    public function tagDelete($id) {
+        $query = "UPDATE tags set status = 'deactive' where tagID = $id";
     }
     public function tagList() {
         $query = "SELECT * from tags where status = 'active'";
