@@ -7,10 +7,15 @@ use src\modeles\tagModel;
 class teacherController{
     
     public function dashboard(){
+        $countCourses = 0;
         $objet = new tagModel();
         $tags = $objet->tagList();
         $obj = new courseModel();
-        $results = $obj->courseList();
+        $id = $_SESSION["teacherID"];
+        $results = $obj->courseList($id);
+        foreach($results as $result){
+            $countCourses++;
+        }
 
 
         include_once  "src/views/teacher/dashboard_view.php";
