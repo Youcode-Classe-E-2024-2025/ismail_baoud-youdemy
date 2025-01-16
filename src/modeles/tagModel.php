@@ -12,14 +12,27 @@ class tagModel {
         $this->db = DatabaseConnection::connect();
     }
 
-    public function tagInsert() {
+    public function tagInsert(tag $obg) {
+        try{
 
+            $query = "INSERT into tags (tagName,status) VALUES (?,?)";
+            $stmt = $this->db->prepare($query);
+            $stmt->execute([$obg->__get("tagName"),$obg->__get("status")]);
+            return true;
+        }catch(exeption $e){
+            $err = "err";
+            return false;
+        }
+        
     }
     public function tagDelete() {
 
     }
     public function tagList() {
-
+        $query = "SELECT * from tags where status = 'active'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
 }
