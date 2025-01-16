@@ -44,9 +44,11 @@ class courseController{
                     $obj = new course($title,$description,$targetFilePath,$category);
                     $objet = new courseModel();
                     $stmt = $objet->courseAdd($obj);
-              
-                if ($stmt) {
-                    echo  "Video uploaded and saved to database successfully!";
+                    foreach($tags as $tag){
+                       $objet->course_tags($tag,$stmt);
+                    }
+                if ($stmt){
+                    header('location: /teacher/dashboard');
                 } else {
                     echo "Failed to save video to database: " . $stmt->error;
                 }
