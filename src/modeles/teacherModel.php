@@ -6,15 +6,20 @@ use config\DatabaseConnection;
 use src\classes\teacher;
 
 
-class teacherModel{
+class teacherModel extends DatabaseConnection{
 
     private $db;
+    
     public function __construct(){
-        $this->db = DatabaseConnection::connect();
+
+
     }
 
-    public function enrollementCourse(){
-
+    public function pandingTeachers($status){
+        $query = "SELECT * from users where role = 'teacher' and status = '$status'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
 
