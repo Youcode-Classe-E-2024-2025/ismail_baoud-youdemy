@@ -22,7 +22,6 @@ class teacherController{
     }
     public function panding(){
         include_once  "src/views/teacher/panding_view.php";
-
     }
 }
 ?>
