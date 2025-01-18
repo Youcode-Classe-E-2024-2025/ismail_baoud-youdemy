@@ -95,9 +95,24 @@ class courseModel {
         $stmt->execute();
         return $stmt->fetch();
     }
-    public function __set($name,$value){
-        $this->$name = $value;
+
+    public function myCourses($userId){
+        $query = "SELECT 
+    *
+FROM 
+    enrollment
+INNER JOIN 
+    courses ON enrollment.courseID = courses.courseID
+INNER JOIN 
+    users ON enrollment.userID = users.userID
+WHERE 
+    courses.status = 'active' 
+    AND users.userID = $userId;";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+   
 
     // public function courseByCategory(){
 
