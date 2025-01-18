@@ -3,7 +3,7 @@ namespace src\classes;
 
 class enrollement {
     private $date;
-
+    
     public function __construct($date) {
         $this->date = $date;
     }

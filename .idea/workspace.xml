@@ -4,31 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="488e3577-d50c-4bb4-b2a6-84a927be46a9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/databaseConnection.php" beforeDir="false" afterPath="$PROJECT_DIR$/config/databaseConnection.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/database/tables.sql" beforeDir="false" afterPath="$PROJECT_DIR$/database/tables.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.php" beforeDir="false" afterPath="$PROJECT_DIR$/index.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/category.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/category.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/courses.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/classes/tag.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/classes/tag.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/Router.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/courseController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/courseController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/loginController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/loginController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/pathsList.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/pathsList.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/studentController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/studentController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/teacherController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/teacherController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modeles/User.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modeles/courseModel.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/modeles/courseModel.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/modeles/coursesModel.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/admin/dashboard_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/admin/dashboard_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/connection/login_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/connection/login_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/student/dashboard_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/student/dashboard_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/student/mycourses_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/student/mycourses_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/teacher/dashboard_view.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/teacher/dashboard_view.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uploads/upload.php" beforeDir="false" afterPath="$PROJECT_DIR$/uploads/upload.php" afterDir="false" />
-    </list>
+    <list default="true" id="488e3577-d50c-4bb4-b2a6-84a927be46a9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -96,7 +72,7 @@
       <workItem from="1736927859608" duration="2938000" />
       <workItem from="1736949546746" duration="596000" />
       <workItem from="1736975092112" duration="737000" />
-      <workItem from="1737017722075" duration="5013000" />
+      <workItem from="1737017722075" duration="5613000" />
     </task>
     <servers />
   </component>

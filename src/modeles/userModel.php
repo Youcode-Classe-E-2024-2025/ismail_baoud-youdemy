@@ -61,10 +61,6 @@ class userModel{
 
     }
 
-    public function coursesList(){
-
-    }
-
 }
 
 ?>

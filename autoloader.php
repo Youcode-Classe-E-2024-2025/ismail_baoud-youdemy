@@ -21,7 +21,7 @@ class autoloader {
                     __DIR__ . "/config/" . $fileName,
                     __DIR__ . "/src/" . $fileName
                 ];
-                
+
                 foreach ($possiblePaths as $path) {
                     error_log("Trying path: " . $path);
                     if(file_exists($path)) {

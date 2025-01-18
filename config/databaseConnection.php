@@ -11,6 +11,8 @@ class DatabaseConnection {
     private static $pass = "baoud";
     private static $dbName = "youdemy";
 
+    protected $conn;
+
     public static function connect()
     {
         try {
@@ -20,7 +22,7 @@ class DatabaseConnection {
                 self::$pass
             );
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            return $conn;
+            $this->conn = $conn;
         } catch (PDOException $e) {
             throw $e;
         }

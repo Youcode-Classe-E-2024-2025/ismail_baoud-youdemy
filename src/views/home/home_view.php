@@ -31,7 +31,7 @@
         ?>
             <div class="bg-white shadow rounded-lg overflow-hidden cursor-pointer" onclick="window.location.href='/login'">
                 <img src="https://www.classcentral.com/report/wp-content/uploads/2021/02/coursera-free-courses.png" alt="Course Image" class="h-40 w-full object-cover">
-                <div class="p-4">/connection
+                <div class="p-4">
                     <h2 class="font-bold text-lg mb-2"><?=$course["title"]?></h2>
                     <p class="text-gray-700 mb-2"><?=$course["description"]?></p>
                     <div class="flex flex-wrap gap-2 mb-2">

@@ -47,7 +47,7 @@ CREATE TABLE course_tags (
 -- Create the enrollment table
 CREATE TABLE enrollment (
                             enrollmentID int AUTO_INCREMENT PRIMARY KEY,
-                            enrollmentDate date NOT NULL,
+                            enrollmentDate DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP;
                             userID int,
                             courseID int,
                             FOREIGN KEY (userID) REFERENCES users(userID),
