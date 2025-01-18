@@ -2,17 +2,30 @@
 namespace src\controllers;
 use src\modeles\courseModel;
 use src\modeles\tagModel;
+use src\modeles\enrollementModel;
 class studentController{
     public function dashboard(){
-        $objet = new tagModel();
-        $tags = $objet->tagList();
-        $obj = new courseModel();
-        $id = $_SESSION["teacherID"];
-        $results = $obj->courseList($id);
+        $tagModel = new tagModel();
+        $tags = $tagModel->tagList();
+        $courseModel = new courseModel();
+        $courses = $courseModel->courseList();
+        
         include_once  "src/views/student/dashboard_view.php";
     }
     public function mycourses(){
+        $course = new courseModel();
+        $courses = $course->myCourses($_SESSION["studentid"]);
         include_once  "src/views/student/mycourses_view.php";
+    }
+
+    public function addEnrollement(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $courseID = $_POST["courseID"];
+            $studentID = $_POST["studentID"];
+            $enroll = new enrollementModel();
+            $enroll->createEnrollment($studentID,$courseID);
+            header("location: /student/mycourses");
+        }
     }
 }
 ?>
