@@ -221,6 +221,7 @@
                             </tr>
                         </thead>
                         <tbody id="userTableBody">
+                          
                         </tbody>
                     </table>
                     <button class="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mt-4" onclick="toggleUserTable()">Close</button>
@@ -243,6 +244,18 @@
                             </tr>
                         </thead>
                         <tbody id="userTableBody">
+                        <?php foreach($active as $result): ?>
+
+<tr class="bg-gray-200">
+        <th class="py-3 px-4"><?=$result['firstName']?> <?=$result['lastName']?></th>
+        <th class="py-3 px-4"><?=$result['email']?></th>
+        <th class="py-3 px-4"><?=$result['status']?></th>
+        <div>
+            <th class="py-3 px-4"><button type='submit'>active</button></th>
+        <th class="py-3 px-4"><button type='submit'>deactivate</button></th>
+        </div>
+    </tr>
+    <?php endforeach;?>
                         </tbody>
                     </table>
                     <button class="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mt-4" onclick="toggleUserTable()">Close</button>
@@ -265,7 +278,19 @@
                             </tr>
                         </thead>
                         <tbody id="userTableBody">
+                <?php foreach($panding as $result): ?>
+
+                        <tr class="bg-gray-200">
+                                <th class="py-3 px-4"><?=$result['firstName']?> <?=$result['lastName']?></th>
+                                <th class="py-3 px-4"><?=$result['email']?></th>
+                                <th class="py-3 px-4"><?=$result['status']?></th>
+                                <div>
+                                    <th class="py-3 px-4"><button type='submit'>active</button></th>
+                                <th class="py-3 px-4"><button type='submit'>deactivate</button></th>
+                                </div>
+                            </tr>
                         </tbody>
+                        <?php endforeach;?>
                     </table>
                     <button class="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mt-4" onclick="toggleUserTable()">Close</button>
                 `;
@@ -287,6 +312,19 @@
                             </tr>
                         </thead>
                         <tbody id="userTableBody">
+                          <?php foreach($deactivate as $result): ?>
+
+                        <tr class="bg-gray-200">
+                                <th class="py-3 px-4"><?=$result['firstName']?> <?=$result['lastName']?></th>
+                                <th class="py-3 px-4"><?=$result['email']?></th>
+                                <th class="py-3 px-4"><?=$result['status']?></th>
+                                <div>
+                                    <th class="py-3 px-4"><button type='submit'>active</button></th>
+                                <th class="py-3 px-4"><button type='submit'>deactivate</button></th>
+                                </div>
+                            </tr>
+                        </tbody>
+                        <?php endforeach;?>
                         </tbody>
                     </table>
                     <button class="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mt-4" onclick="toggleUserTable()">Close</button>
