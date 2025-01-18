@@ -27,9 +27,18 @@ class tagModel {
     }
     public function tagDelete($id) {
         $query = "UPDATE tags set status = 'deactive' where tagID = $id";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
     }
     public function tagList() {
         $query = "SELECT * from tags where status = 'active'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function tagCourse($id){
+        $query = "SELECT c.tagName , c.tagID from tags c inner join course_tags ct on ct.tagID = c.tagID where ct.courseID = $id ";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
