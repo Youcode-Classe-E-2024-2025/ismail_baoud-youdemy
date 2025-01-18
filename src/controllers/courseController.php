@@ -4,10 +4,10 @@ use src\classes\course;
 use src\modeles\courseModel;
 class courseController{
     public function addCourse(){
-        $title = $_POST["title"];
-        $description = $_POST["description"];
-        $tags = $_POST["tags"];
-        $category = $_POST["category"];
+        $title = htmlspecialchars(trim($_POST["title"]));
+        $description = htmlspecialchars(trim($_POST["description"]));
+        $tags = htmlspecialchars(trim($_POST["tags"]));
+        $category = htmlspecialchars(trim($_POST["category"]));
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             
             $targetDir = "uploads/";
@@ -62,7 +62,7 @@ class courseController{
     
     public function deleteCourse(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $id = $_POST["dletedID"];
+            $id = htmlspecialchars(trim($_POST["dletedID"]));
             $obg = new courseModel();
             $obg->courseDelete($id);
             header('location: /teacher/dashboard');
@@ -71,8 +71,8 @@ class courseController{
 
     public function updateCourse(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $title = $_POST["title"];
-            $description = $_POST["description"];
+            $title = htmlspecialchars(trim($_POST["title"]));
+            $description = htmlspecialchars(trim($_POST["description"]));
             $id=$_POST["id"];
             $obg = new courseModel();
             
