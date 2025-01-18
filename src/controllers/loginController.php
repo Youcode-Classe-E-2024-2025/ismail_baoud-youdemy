@@ -7,7 +7,7 @@ use src\modeles\userModel;
 class loginController{
     public function logout(){
         session_destroy();
-        include_once  "src/views/home/home_view.php";
+        header("location: /home/view");
     } 
     public function login_controller(){
         $status;
@@ -25,7 +25,7 @@ class loginController{
                 if(password_verify( $password, $result['password'] )){
                     if($result["role"] == "student"){
                         
-                        $_SESSION["role"] = "student";
+                        $_SESSION["studentid"] = $result["userID"];
                         header("location: /student/mycourses");
                     }
                     elseif($result["role"] == "teacher"){
@@ -42,7 +42,7 @@ class loginController{
                         }
                     }else{
                         $_SESSION["role"] = "admin";
-                        require_once "src/views/admin/dashboard_view.php";
+                        header('location: /admin/dashboard');
                     }
                 }else{
                     require_once "src/views/connection/login_view.php";
