@@ -7,7 +7,7 @@ use src\modeles\userModel;
 class loginController{
     public function logout(){
         session_destroy();
-        include_once  "src/views/connection/login_view.php";
+        include_once  "src/views/home/home_view.php";
     } 
     public function login_controller(){
         $status;
@@ -53,8 +53,8 @@ class loginController{
 
         }
     }    
-    public function home(){
-        include_once  "src/views/home/home_view.php";
+    public function login_view(){
+        include_once  "src/views/connection/login_view.php";
     }
 }
 ?>
