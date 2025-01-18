@@ -51,22 +51,59 @@ class courseModel {
     }
 
 
-    public function courseList($id){
+    public function courseListTeacher($id){
         $query = "SELECT * FROM courses where status = 'active' and teacherID = $id";
         $stmt = $this->db->query($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function courseList(){
+        $query = "
+        SELECT 
+            c.courseID, 
+            c.title, 
+            u.firstName,
+            u.lastName,
+            c.description, 
+            t.tagName, 
+            c.content,
+            ca.categoryName
+        FROM 
+            courses c
+        INNER JOIN 
+            course_tags ct ON c.courseID = ct.courseID
+        INNER JOIN 
+            tags t ON ct.tagID = t.tagID
+        INNER JOIN 
+            categorys ca ON c.categoryID = ca.categoryID
+        INNER JOIN 
+            users u ON c.teacherID = u.userID
+        WHERE 
+            c.status = 'active' 
+            AND ca.status = 'active'
+    ";
+    
+    $stmt = $this->db->query($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    
+    }
 
     public function totalCourses(){
+        $query = "SELECT count(*) from courses where status = 'active'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+    public function __set($name,$value){
+        $this->$name = $value;
+    }
+
+    // public function courseByCategory(){
+
+    // }
+
+    // public function LastIdCours(){
         
-    }
-
-    public function courseByCategory(){
-
-    }
-
-    public function LastIdCours(){
-        
-    }
+    // }
 }
