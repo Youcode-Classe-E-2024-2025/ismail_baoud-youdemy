@@ -16,6 +16,7 @@ use src\controllers\teacherController;
 use src\controllers\adminController;
 use src\controllers\signupController;
 use src\controllers\courseController;
+use src\controllers\homeController;
 use src\modeles\User;
 
 use config\DatabaseConnection;
@@ -28,14 +29,15 @@ try {
 
 $controllerRouter = new ControllerRouter();
 
-$controllerRouter->add('GET', '/', [loginController::class, 'logout']);
-$controllerRouter->add('GET', '/login', [loginController::class, 'login']);
+$controllerRouter->add('GET', '/', [homeController::class, 'home']);
+$controllerRouter->add('GET', '/login', [loginController::class, 'login_view']);
 $controllerRouter->add('POST', '/login/controller', [loginController::class, 'login_controller']);
 $controllerRouter->add('GET', '/signup', [signupController::class, 'signup_view']);
 $controllerRouter->add('POST', '/controller/signup', [signupController::class, 'signup']);
 $controllerRouter->add('GET', '/logout', [loginController::class, 'logout']);
 $controllerRouter->add('GET', '/student/dashboard', [studentController::class, 'dashboard']);
 $controllerRouter->add('GET', '/student/mycourses', [studentController::class, 'mycourses']);
+$controllerRouter->add('POST', '/student/dashboard/enrollement', [studentController::class, 'addEnrollement']);
 $controllerRouter->add('GET', '/teacher/dashboard', [teacherController::class, 'dashboard']);
 $controllerRouter->add('GET', '/teacher/dashboard/panding', [teacherController::class, 'panding']);
 $controllerRouter->add('GET', '/admin/dashboard', [adminController::class, 'dashboard']);
@@ -44,6 +46,7 @@ $controllerRouter->add('POST', '/dashboard/category', [adminController::class, '
 $controllerRouter->add('POST', '/dashboard/tag', [adminController::class, 'addTag']);
 $controllerRouter->add('POST', '/teacher/course/delete', [courseController::class, 'deleteCourse']);
 $controllerRouter->add('POST', '/teacher/course/update', [courseController::class, 'updateCourse']);
+$controllerRouter->add('GET', '/home/view', [homeController::class, 'home']);
 
 
 $controllerRouter->dispatch($_SERVER['REQUEST_URI']);
