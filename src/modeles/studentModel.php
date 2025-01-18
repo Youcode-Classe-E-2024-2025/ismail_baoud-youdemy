@@ -13,7 +13,7 @@ class studentModel{
     }
 
     public function myCourses() {
-
+        
     }
 }
 
