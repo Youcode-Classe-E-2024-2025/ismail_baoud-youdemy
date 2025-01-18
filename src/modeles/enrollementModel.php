@@ -13,8 +13,10 @@ class enrollementModel {
         $this->db = DatabaseConnection::connect();
     }
 
-    public function createEnrollment() {
-
+    public function createEnrollment($user,$course) {
+        $query = "INSERT into enrollment (userID,courseID) values ($user,$course)";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
     }
 
     public function deleteEnrollment() {
@@ -24,4 +26,5 @@ class enrollementModel {
     public function enrollmentList() {
 
     }
+
 }
