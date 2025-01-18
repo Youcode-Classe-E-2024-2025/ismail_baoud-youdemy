@@ -18,13 +18,13 @@ class signupController
     {
         $this->connect();
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $firstName = $_POST['firstName'];
-            $lastName = $_POST['lastName'];
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-            $confirmPassword = $_POST['confirmPassword'];
-            $phoneNumber = $_POST['phoneNumber'];
-            $role = $_POST['role'];
+            $firstName = htmlspecialchars(trim($_POST['firstName']));
+            $lastName = htmlspecialchars(trim($_POST['lastName']));
+            $email = htmlspecialchars(trim($_POST['email']));
+            $password = trim($_POST['password']);
+            $confirmPassword = trim($_POST['confirmPassword']);
+            $phoneNumber = htmlspecialchars(trim($_POST['phoneNumber']));
+            $role = htmlspecialchars(trim($_POST['role']));
             if ($password != $confirmPassword) {
                 $err = "Passwords do not match";
                 return;
