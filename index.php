@@ -52,5 +52,5 @@ $controllerRouter->add('GET', '/home/view', [homeController::class, 'home']);
 
 
 // $uri strtok($_SERVER(), "?")
-$controllerRouter->dispatch($_SERVER['REQUEST_URI']);
+$controllerRouter->dispatch(strtok($_SERVER['REQUEST_URI'], "?"));
 ?>
