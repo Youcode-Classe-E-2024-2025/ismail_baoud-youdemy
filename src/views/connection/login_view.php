@@ -8,10 +8,20 @@
 </head>
 <body class="bg-gray-100 font-sans">
 
-<div class="min-h-screen flex">
+<nav class="bg-white shadow-md py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-2xl font-bold text-gray-800">Youdemy</a>
+            <div class="space-x-6">
+                <a href="#" class="text-gray-700 hover:text-blue-500">Dashboard</a>
+                <a href="/logout" class="text-gray-700 hover:text-blue-500">Log out </a>
+            </div>
+        </div>
+    </nav><div class="min-h-screen flex">
+    
+    
     <div class="w-1/2 bg-gradient-to-br to-purple-500 flex items-center justify-center relative">
         <img src="https://img.freepik.com/free-vector/online-learning-concept-illustration_114360-4371.jpg?t=st=1736778751~exp=1736782351~hmac=3ff378135da98135f9540d41fa5f3228ea886b70c160c2f423786823d7295c66&w=826" alt="Abstract Learning Illustration" class="w-3/4 max-w-full">
-
+        
     </div>
     <div class="w-1/2 flex items-center justify-center p-8">
         <div class="max-w-md w-full">
