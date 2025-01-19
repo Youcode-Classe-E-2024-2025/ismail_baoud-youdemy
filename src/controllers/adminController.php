@@ -50,10 +50,9 @@ class adminController{
     }
     public function changeCourseStatus(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            $newStatus = $_POST["status"];
             $id = $_POST["courseid"];
             $teacher = new courseModel();
-            $teacher->changeStatus($newStatus,$id);
+            $teacher->courseDelete($id);
             header('location: /admin/dashboard');
 
         }

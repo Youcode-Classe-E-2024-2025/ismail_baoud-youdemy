@@ -22,7 +22,7 @@ class DatabaseConnection {
                 self::$pass
             );
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->conn = $conn;
+            return $conn;
         } catch (PDOException $e) {
             throw $e;
         }
