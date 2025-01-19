@@ -37,7 +37,7 @@
     </nav>
 
    <div class="flex justify-center items-center mt-20">
-    <h1 class="text-xl">your account is panding</h1>
+    <h1 class="text-xl">your account is panding go back : <a class="text-blue-500" href="/home/view">home</a></h1>
    </div>
 </body>
 </html>

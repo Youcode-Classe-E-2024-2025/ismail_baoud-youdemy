@@ -83,36 +83,4 @@ class courseController{
             header('location: /teacher/dashboard');
         }
     }
-    public function withPagination (){
-
-        $itemPerPage = 10;
-
-        // page nb
-        $page = isset($_GET['page']) ? (int)$_GET['page'] : 1 ;
-
-        
-        
-        // count
-        $count = $this->model->totalCourses();
-        
-        $totalPages =ceil( $count/$itemPerPage) ;
-        echo $totalPages;
-        // validation
-        if($page <= 0 || $page >$totalPages){
-            
-            $page=1;
-        }
-
-
-        $offset = $itemPerPage * ($page-1);
-        // echo $count ;
-
-        // nb page
-
-        // echo $nbTotalPages ;
-        // $books = $this->model->getAllbooks();
-        $books = $this->model->getSlice($itemPerPage,(int)$offset);
-
-    }
-
 }
