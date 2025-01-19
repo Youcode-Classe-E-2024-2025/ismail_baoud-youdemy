@@ -49,13 +49,31 @@
         <?php endforeach; ?>
         </div>
 
-        <div class="mt-6 flex justify-center">
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2 disabled">Previous</button>
+        <div class="mt-6 flex justify-center items-center">
+            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2 disabled" disabled>First</button>
+            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2 disabled" disabled>Previous</button>
+            <nav class="flex items-center">
+                <ul class="flex space-x-1">
+                    <li><a href="#" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">1</a></li>
+                    <li><a href="#" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">2</a></li>
+                    <li><span class="text-gray-500 font-bold py-2 px-4">...</span></li>
+                    <li><a href="#" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">10</a></li>
+                </ul>
+            </nav>
             <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ml-2">Next</button>
+            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ml-2">Last</button>
         </div>
-
     </main>
 
+    <footer class="bg-gray-800 text-white py-4 mt-8">
+        <div class="container mx-auto text-center">
+            <p>&copy; <?= date('Y') ?> Youdemy. All rights reserved.</p>
+            <div class="mt-2">
+                <a href="/terms" class="text-gray-400 hover:text-gray-300">Terms of Service</a> | 
+                <a href="/privacy" class="text-gray-400 hover:text-gray-300">Privacy Policy</a>
+            </div>
+        </div>
+    </footer>
 
 </body>
 </html>
