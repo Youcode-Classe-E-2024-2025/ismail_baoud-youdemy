@@ -85,7 +85,7 @@ class courseModel {
         $query = "SELECT count(*) from courses where status = 'active'";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
-        return $stmt->fetch();
+        return $stmt->fetchColumn();
     }
 
     public function myCourses($userId){
@@ -105,6 +105,59 @@ class courseModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getSlice($limit ,$offset){
+        $sql ="SELECT 
+            *
+        FROM 
+            courses c
+        INNER JOIN 
+            course_tags ct ON c.courseID = ct.courseID
+        INNER JOIN 
+            tags t ON ct.tagID = t.tagID
+        INNER JOIN 
+            categorys ca ON c.categoryID = ca.categoryID
+        INNER JOIN 
+            users u ON c.teacherID = u.userID
+        WHERE 
+            c.status = 'active' 
+            AND ca.status = 'active' limit :limit offset :offset  ";
+        $stm = $this->db->prepare($sql);
+        $stm->bindParam('limit',$limit,PDO::PARAM_INT);
+        $stm->bindParam('offset',$offset,PDO::PARAM_INT);
+        $stm->execute();
+
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    public function recherche($motCle ,$limit ,$offset)
+    {
+        $sql = "SELECT 
+            *
+        FROM 
+            courses c
+        INNER JOIN 
+            course_tags ct ON c.courseID = ct.courseID
+        INNER JOIN 
+            tags t ON ct.tagID = t.tagID
+        INNER JOIN 
+            categorys ca ON c.categoryID = ca.categoryID
+        INNER JOIN 
+            users u ON c.teacherID = u.userID
+        WHERE 
+            c.status = 'active' and title  
+        LIKE :mot_cle OR description LIKE :mot_cle 
+        ORDER BY title DESC limit $limit offset $offset  ";
+
+        $stmt = $this->db->prepare($sql);
+        $stmt->bindParam('offset',$offset,PDO::PARAM_INT);
+
+        $stmt->execute(['mot_cle' => '%' . $motCle . '%']);
+
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+}
+
     
    
 
@@ -115,4 +168,3 @@ class courseModel {
     // public function LastIdCours(){
         
     // }
-}
