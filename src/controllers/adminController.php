@@ -8,12 +8,17 @@ use src\modeles\categoryModel;
 use src\classes\tag;
 use src\modeles\tagModel;
 use src\modeles\teacherModel;
+use src\modeles\courseModel;
 class adminController{
     public function dashboard(){
         $teacher = new teacherModel();
         $panding = $teacher->pandingTeachers('On hold');
         $active = $teacher->pandingTeachers('active');
         $deactivate = $teacher->pandingTeachers('deactivate');
+        $course = new courseModel();
+        $courses = $course->courseList();
+
+
         include_once  "src/views/admin/dashboard_view.php";
     }
     public function addCategory(){
@@ -31,6 +36,26 @@ class adminController{
             $objet = new tagModel();
             $res = $objet->tagInsert($obj);
             echo $res;
+        }
+    }
+    public function changeUserStatus(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $newStatus = $_POST["status"];
+            $id = $_POST["userid"];
+            $teacher = new teacherModel();
+            $teacher->changeStatus($newStatus,$id);
+            header('location: /admin/dashboard');
+
+        }
+    }
+    public function changeCourseStatus(){
+        if($_SERVER["REQUEST_METHOD"] == "POST"){
+            $newStatus = $_POST["status"];
+            $id = $_POST["courseid"];
+            $teacher = new courseModel();
+            $teacher->changeStatus($newStatus,$id);
+            header('location: /admin/dashboard');
+
         }
     }
     
