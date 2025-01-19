@@ -46,8 +46,11 @@ $controllerRouter->add('POST', '/dashboard/category', [adminController::class, '
 $controllerRouter->add('POST', '/dashboard/tag', [adminController::class, 'addTag']);
 $controllerRouter->add('POST', '/teacher/course/delete', [courseController::class, 'deleteCourse']);
 $controllerRouter->add('POST', '/teacher/course/update', [courseController::class, 'updateCourse']);
+$controllerRouter->add('POST', '/admin/users/changeStatus', [adminController::class, 'changeUserStatus']);
+$controllerRouter->add('POST', '/admin/course/changeStatus', [adminController::class, 'changeCourseStatus']);
 $controllerRouter->add('GET', '/home/view', [homeController::class, 'home']);
 
 
+// $uri strtok($_SERVER(), "?")
 $controllerRouter->dispatch($_SERVER['REQUEST_URI']);
 ?>
