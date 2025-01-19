@@ -6,13 +6,12 @@ use config\DatabaseConnection;
 use src\classes\teacher;
 
 
-class teacherModel extends DatabaseConnection{
+class teacherModel{
 
     private $db;
     
     public function __construct(){
-
-
+        $this->db = DatabaseConnection::connect();
     }
 
     public function pandingTeachers($status){
@@ -20,6 +19,11 @@ class teacherModel extends DatabaseConnection{
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function changeStatus($newStatus, $id){
+        $query = "UPDATE users set status = '$newStatus' where userID = $id";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
     }
 }
 
