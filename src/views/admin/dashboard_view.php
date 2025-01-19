@@ -65,20 +65,21 @@
                     </tr>
                 </thead>
                 <tbody>
+                <?php foreach($courses as $course): ?>
                     <tr>
-                        <td class="border py-2 px-4">Course 1</td>
-                        <td class="border py-2 px-4">Description for Course 1</td>
+                        <td class="border py-2 px-4"><?=$course['title']?></td>
+                        <td class="border py-2 px-4"><?=$course['description']?></td>
                         <td class="border py-2 px-4">
-                            <button class="bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-2 rounded" onclick="deleteCourse('Course 1')">Delete</button>
-                        </td>
+                        <form action="/admin/course/changeStatus" method="POST" style="display:inline;">
+                            <input type="hidden" name="status" value="deactivate">
+                            <input type="hidden" name="courseid" value="<?=$course['courseID']?>">
+                            <button type="submit" class="bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-2 rounded">Delete</button>
+                        </form>
+                </td>
                     </tr>
-                    <tr>
-                        <td class="border py-2 px-4">Course 2</td>
-                        <td class="border py-2 px-4">Description for Course 2</td>
-                        <td class="border py-2 px-4">
-                            <button class="bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-2 rounded" onclick="deleteCourse('Course 2')">Delete</button>
-                        </td>
-                    </tr>
+
+                <?php endforeach; ?>
+
                 </tbody>
             </table>
             <button class="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mt-4" onclick="toggleManageContent()">Close</button>
@@ -250,10 +251,13 @@
         <th class="py-3 px-4"><?=$result['firstName']?> <?=$result['lastName']?></th>
         <th class="py-3 px-4"><?=$result['email']?></th>
         <th class="py-3 px-4"><?=$result['status']?></th>
-        <div>
-            <th class="py-3 px-4"><button type='submit'>active</button></th>
-        <th class="py-3 px-4"><button type='submit'>deactivate</button></th>
-        </div>
+        <td class="border py-2 px-4">
+            <form action="/admin/users/changeStatus" method="POST" style="display:inline;">
+                <input type="hidden" name="status" value="deactivate">
+                <input type="hidden" name="userid" value="<?=$result['userID']?>">
+                <button type="submit" class="bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-2 rounded">Ban</button>
+            </form>
+        </td>
     </tr>
     <?php endforeach;?>
                         </tbody>
@@ -270,7 +274,7 @@
                     <h2 class="font-bold text-2xl mb-4 text-purple-600">Pending Users</h2>
                     <table class="min-w-full bg-white shadow-lg rounded-lg">
                         <thead>
-                            <tr class="bg-gray-200">
+                            <tr class="bg-gray-300">
                                 <th class="py-3 px-4">Name</th>
                                 <th class="py-3 px-4">Email</th>
                                 <th class="py-3 px-4">Status</th>
@@ -278,17 +282,25 @@
                             </tr>
                         </thead>
                         <tbody id="userTableBody">
-                <?php foreach($panding as $result): ?>
+                        <?php foreach($panding as $result): ?>
 
-                        <tr class="bg-gray-200">
-                                <th class="py-3 px-4"><?=$result['firstName']?> <?=$result['lastName']?></th>
-                                <th class="py-3 px-4"><?=$result['email']?></th>
-                                <th class="py-3 px-4"><?=$result['status']?></th>
-                                <div>
-                                    <th class="py-3 px-4"><button type='submit'>active</button></th>
-                                <th class="py-3 px-4"><button type='submit'>deactivate</button></th>
-                                </div>
-                            </tr>
+                        <tr class="hover:bg-gray-100 even:bg-gray-200 odd:bg-gray-100">
+                            <td class="border py-2 px-4"><?=$result['firstName']?> <?=$result['lastName']?></td>
+                            <td class="border py-2 px-4"><?=$result['email']?></td>
+                            <td class="border py-2 px-4"><?=$result['status']?></td>
+                            <td class="border py-2 px-4">
+                                <form action="/admin/users/changeStatus" method="POST" style="display:inline;">
+                                    <input type="hidden" name="status" value="active">
+                                    <input type="hidden" name="userid" value="<?=$result['userID']?>">
+                                    <button type="submit" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-1 px-2 rounded">Activate</button>
+                                </form>
+                                <form action="/admin/users/changeStatus" method="POST" style="display:inline;">
+                                    <input type="hidden" name="status" value="deactivate">
+                                    <input type="hidden" name="userid" value="<?=$result['userID']?>">
+                                    <button type="submit" class="bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-2 rounded">Refuse</button>
+                                </form>
+                            </td>
+                        </tr>
                         </tbody>
                         <?php endforeach;?>
                     </table>
@@ -318,10 +330,13 @@
                                 <th class="py-3 px-4"><?=$result['firstName']?> <?=$result['lastName']?></th>
                                 <th class="py-3 px-4"><?=$result['email']?></th>
                                 <th class="py-3 px-4"><?=$result['status']?></th>
-                                <div>
-                                    <th class="py-3 px-4"><button type='submit'>active</button></th>
-                                <th class="py-3 px-4"><button type='submit'>deactivate</button></th>
-                                </div>
+                                <td class="border py-2 px-4">
+                                    <form action="/admin/users/changeStatus" method="POST" style="display:inline;">
+                                        <input type="hidden" name="status" value="active">
+                                        <input type="hidden" name="userid" value="<?=$result['userID']?>">
+                                        <button type="submit" class="bg-green-600 hover:bg-green-800 text-white font-bold py-1 px-2 rounded">Unban</button>
+                                    </form>
+                                </td>
                             </tr>
                         </tbody>
                         <?php endforeach;?>
@@ -345,11 +360,20 @@
                             <td class="border py-2 px-4">${user.status}</td>
                             <td class="border py-2 px-4">
                                 ${user.status !== 'active' ? 
-                                    `<button class="bg-green-600 hover:bg-green-800 text-white font-bold py-1 px-2 rounded mr-2" onclick="activateUser('${user.email}')">Activate</button>` : ''}
+                                    `<form action="/api/users/activate" method="POST" style="display:inline;">
+                                        <input type="hidden" name="email" value="${user.email}">
+                                        <button type="submit" class="bg-green-600 hover:bg-green-800 text-white font-bold py-1 px-2 rounded mr-2">Activate</button>
+                                    </form>` : ''}
                                 ${user.status !== 'banned' ? 
-                                    `<button class="bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-2 rounded" onclick="banUser('${user.email}')">Ban</button>` : ''}
+                                    `<form action="/api/users/ban" method="POST" style="display:inline;">
+                                        <input type="hidden" name="email" value="${user.email}">
+                                        <button type="submit" class="bg-red-600 hover:bg-red-800 text-white font-bold py-1 px-2 rounded">Ban</button>
+                                    </form>` : ''}
                                 ${user.status === 'banned' ? 
-                                    `<button class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-1 px-2 rounded" onclick="unbanUser('${user.email}')">Unban</button>` : ''}
+                                    `<form action="/api/users/unban" method="POST" style="display:inline;">
+                                        <input type="hidden" name="email" value="${user.email}">
+                                        <button type="submit" class="bg-blue-600 hover:bg-blue-800 text-white font-bold py-1 px-2 rounded">Unban</button>
+                                    </form>` : ''}
                             </td>
                         </tr>
                     `).join('');
