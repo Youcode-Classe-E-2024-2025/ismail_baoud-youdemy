@@ -58,16 +58,8 @@ class courseModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
     public function courseList(){
-        $query = "
-        SELECT 
-            c.courseID, 
-            c.title, 
-            u.firstName,
-            u.lastName,
-            c.description, 
-            t.tagName, 
-            c.content,
-            ca.categoryName
+        $query = " SELECT 
+            *
         FROM 
             courses c
         INNER JOIN 
@@ -99,19 +91,21 @@ class courseModel {
     public function myCourses($userId){
         $query = "SELECT 
     *
-FROM 
-    enrollment
-INNER JOIN 
-    courses ON enrollment.courseID = courses.courseID
-INNER JOIN 
-    users ON enrollment.userID = users.userID
-WHERE 
+    FROM
+        enrollment
+    INNER JOIN
+        courses ON enrollment.courseID = courses.courseID
+    INNER JOIN
+        users ON enrollment.userID = users.userID
+    WHERE
     courses.status = 'active' 
     AND users.userID = $userId;";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+
+    
    
 
     // public function courseByCategory(){
