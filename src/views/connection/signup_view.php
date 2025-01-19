@@ -6,7 +6,17 @@
     <title>Sign Up</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body class="bg-gray-100 flex items-center justify-center h-screen">
+<body >
+<nav class="bg-white shadow-md py-4">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="/" class="text-2xl font-bold text-gray-800">Youdemy</a>
+            <div class="space-x-6">
+                <a href="#" class="text-gray-700 hover:text-blue-500">Dashboard</a>
+                <a href="/logout" class="text-gray-700 hover:text-blue-500">Log out </a>
+            </div>
+        </div>
+    </nav>
+<div class="bg-gray-100 flex items-center justify-center h-screen">
 <div class="flex flex-col md:flex-row w-full max-w-5xl bg-white rounded-lg shadow-lg overflow-hidden">
     <div class="md:w-1/2 p-6 flex flex-col justify-center items-center">
         <img src="https://img.freepik.com/free-vector/task-concept-illustration_114360-3578.jpg?t=st=1736778722~exp=1736782322~hmac=e2dc59b3b22724ac5c767fcd41155abb1461c592038fa235401dddb36373336e&w=826" alt="Illustration" class="w-full h-auto">
@@ -47,6 +57,7 @@
             <a href="/login" class="text-blue-500 hover:underline">Already have an account? Login</a>
         </div>
     </div>
+</div>
 </div>
 </body>
 </html>
