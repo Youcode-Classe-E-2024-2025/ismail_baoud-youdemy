@@ -24,9 +24,9 @@ class loginController{
                 
                 if(password_verify( $password, $result['password'] )){
                     if($result["role"] == "student"){
-                        
+                        $_SESSION["role"] = "student";
                         $_SESSION["studentid"] = $result["userID"];
-                        header("location: /student/mycourses");
+                        header("location: /student/dashboard");
                     }
                     elseif($result["role"] == "teacher"){
                         if($result["status"] == "On hold"){
