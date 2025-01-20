@@ -12,6 +12,7 @@ use src\modeles\courseModel;
 class adminController{
     public function dashboard(){
         $teacher = new teacherModel();
+        $allUsers = $teacher->allTeachers();
         $panding = $teacher->pandingTeachers('On hold');
         $active = $teacher->pandingTeachers('active');
         $deactivate = $teacher->pandingTeachers('deactivate');
