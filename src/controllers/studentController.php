@@ -14,7 +14,9 @@ class studentController{
     }
     public function mycourses(){
         $course = new courseModel();
-        $courses = $course->myCourses($_SESSION["studentid"]);
+        if($_SESSION["studentid"]){
+            $courses = $course->myCourses($_SESSION["studentid"]);
+        }
         include_once  "src/views/student/mycourses_view.php";
     }
 
