@@ -20,6 +20,12 @@ class teacherModel{
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function allTeachers(){
+        $query = "SELECT * from users where role = 'teacher'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     public function changeStatus($newStatus, $id){
         $query = "UPDATE users set status = '$newStatus' where userID = $id";
         $stmt = $this->db->prepare($query);
