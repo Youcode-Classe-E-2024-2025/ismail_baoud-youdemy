@@ -49,6 +49,7 @@ if (!is_array($courses)) {
 
         <div id="dashboard" class="mb-6">
             <h1 class="text-3xl font-bold mb-4">Welcome, Teacher Name!</h1>
+            
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 <div class="bg-white shadow-lg rounded-lg p-6 mb-4 border border-gray-200">
                     <h3 class="text-lg font-semibold mb-2">Total Courses Created</h3>
@@ -107,12 +108,39 @@ if (!is_array($courses)) {
                     <input type="text" id="course-title" name="title" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 </div>
                 <div class="mb-4">
-                    <label for="course-description" class="block text-gray-700 text-sm font-bold mb-2">Course Description:</label>
-                    <textarea id="course-description" name="description" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                    <label for="description" class="block text-gray-700 text-sm font-bold mb-2">Course Description:</label>
+                    <input type="text" id="course-description" name="description" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                 </div>
                 <div class="mb-4">
-                    <label for="course-content" class="block text-gray-700 text-sm font-bold mb-2">Content Upload:</label>
+                    <label for="course-content-type" class="block text-gray-700 text-sm font-bold mb-2">Content Type:</label>
+                    <select id="course-content-type" name="content_type" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" onchange="toggleContentInputs()">
+                        <option value="video">Video</option>
+                        <option value="text">Text</option>
+                    </select>
+                </div>
+                <div id="video-upload" class="mb-4">
+                    <label for="content" class="block text-gray-700 text-sm font-bold mb-2">Content Upload:</label>
                     <input type="file" name="content" id="content" accept="video/*" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                </div>
+                <div id="text-editor" class="hidden mb-4">
+                    <tinymce-editor
+                      api-key="no-api-key"
+                      height="500"
+                      menubar="false"
+                      plugins="advlist autolink lists link image charmap preview anchor
+                        searchreplace visualblocks code fullscreen
+                        insertdatetime media table code help wordcount markdown"
+                      toolbar="undo redo | blocks | bold italic backcolor |
+                        alignleft aligncenter alignright alignjustify |
+                        bullist numlist outdent indent | removeformat | help | markdown"
+                      content_style="body
+                      {
+                        font-family:Helvetica,Arial,sans-serif;
+                        font-size:14px
+                      }">
+
+                        <textarea id="description" name="md"></textarea>
+                        </tinymce-editor>
                 </div>
                 <div class="mb-4">
                     <label class="block text-gray-700 text-sm font-bold mb-2">Tags:</label>
@@ -236,9 +264,9 @@ if (!is_array($courses)) {
                     </div>
                 </form>
             </div>
-        </div>
+    </div>
 
-        <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             const navLinks = document.querySelectorAll('a:not([href="/home/view"])');
             const sections = document.querySelectorAll('main > div');
@@ -271,10 +299,8 @@ if (!is_array($courses)) {
             videoPlayer.querySelector('source').src = videoSrc;
             videoPlayer.load();
             document.getElementById('video-player').classList.remove('hidden');
-            // Prevent body scrolling when video is open
             document.body.style.overflow = 'hidden';
             
-            // Add event listener for ESC key to close video
             document.addEventListener('keydown', closeVideoOnEsc);
         }
 
@@ -284,10 +310,9 @@ if (!is_array($courses)) {
             videoPlayer.querySelector('source').src = '';
             videoPlayer.load();
             document.getElementById('video-player').classList.add('hidden');
-            // Restore body scrolling
+            
             document.body.style.overflow = 'auto';
             
-            // Remove ESC key event listener
             document.removeEventListener('keydown', closeVideoOnEsc);
         }
 
@@ -295,12 +320,6 @@ if (!is_array($courses)) {
             if (event.key === 'Escape') {
                 hideVideo();
             }
-        }
-
-        function showPlaylist(courseId) {
-            // Show video player directly with the course video
-            const videoSrc = 'YOUR_VIDEO_URL_HERE'; // Replace with your actual video URL
-            showVideo(videoSrc);
         }
 
         function showEnrollmentList(courseId) {
@@ -352,6 +371,71 @@ if (!is_array($courses)) {
                 alert('Course deleted!');
             }
         }
+                    function toggleContentInputs() {
+                        const contentType = document.getElementById('course-content-type').value;
+                        document.getElementById('video-upload').style.display = contentType === 'video' ? 'block' : 'none';
+                        document.getElementById('text-editor').style.display = contentType === 'text' ? 'block' : 'none';
+                    }
+                    toggleContentInputs();
+
+        function initializeTinyMCE() {
+            const script = document.createElement('script');
+            script.src = 'https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.3/tinymce.min.js';
+            script.onload = function() {
+                tinymce.init({
+                    selector: '#description',
+                    height: 500,
+                    menubar: false,
+                    plugins: [
+                        'advlist', 'autolink', 'lists', 'link', 'image', 'charmap', 
+                        'preview', 'anchor', 'searchreplace', 'visualblocks', 
+                        'code', 'fullscreen', 'insertdatetime', 'media', 
+                        'table', 'code', 'help', 'wordcount', 'markdown'
+                    ],
+                    toolbar: 'undo redo | blocks | bold italic backcolor | ' +
+                            'alignleft aligncenter alignright alignjustify | ' +
+                            'bullist numlist outdent indent | removeformat | help | markdown',
+                    content_style: 'body { font-family: Helvetica,Arial,sans-serif; font-size:14px }',
+                    
+                    browser_spellcheck: true,
+                    contextmenu: false,
+                    entity_encoding: 'raw',
+                    convert_urls: false,
+                    
+                    setup: function(editor) {
+                        editor.on('init', function() {
+                            const editorContainer = document.querySelector('.tox.tox-tinymce');
+                            if (editorContainer) {
+                                editorContainer.style.visibility = 'visible';
+                            }
+                        });
+                    
+                        editor.on('change', function() {
+                            const content = editor.getContent();
+                        });
+                    }
+                });
+            };
+            
+            script.onerror = function() {
+                console.error('Failed to load TinyMCE script');
+                const editorContainer = document.getElementById('text-editor');
+                if (editorContainer) {
+                    editorContainer.innerHTML = '<div class="text-red-500">Failed to load text editor. Please refresh the page.</div>';
+                }
+            };
+            
+            document.body.appendChild(script);
+        }
+        
+        document.addEventListener('DOMContentLoaded', initializeTinyMCE);
+        
+        function destroyTinyMCE() {
+            if (window.tinymce) {
+                tinymce.get('description')?.remove();
+            }
+        }
     </script>
+  
 </body>
 </html>
