@@ -1,3 +1,8 @@
+<?php
+
+$_SESSION["role"] !=="student" ? header('location: /home/view') : "";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
