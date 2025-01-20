@@ -12,8 +12,7 @@
         <div class="container mx-auto flex justify-between items-center">
             <a href="/" class="text-2xl font-bold text-gray-800">Youdemy</a>
             <div class="space-x-6">
-                <a href="#" class="text-gray-700 hover:text-blue-500">Dashboard</a>
-                <a href="/logout" class="text-gray-700 hover:text-blue-500">Log out </a>
+                <a href="/" class="text-gray-700 hover:text-blue-500">Dashboard</a>
             </div>
         </div>
     </nav><div class="min-h-screen flex">
