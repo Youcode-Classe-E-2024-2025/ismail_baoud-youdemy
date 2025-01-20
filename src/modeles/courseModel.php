@@ -12,17 +12,8 @@ class courseModel {
         $this->db = DatabaseConnection::connect();
     }
 
-    public function courseAdd(course $obj,$id){
-        try{
-            $query = "INSERT into courses (title,description,content,categoryId,teacherID) values (?,?,?,?,?)";
-            $stmt = $this->db->prepare($query);
-            $stmt->execute([$obj->__get("title"),$obj->__get("description"),$obj->__get("content"),$obj->__get("categoryId"),$id]);
-            return $this->db->lastInsertId();
-        }catch(exeption $e){
-            return false;
-        }
+    public function courseAdd(course $obj, $id){
     }
-
     public function course_tags($tagID, $courseID){
         try{
             $query = "INSERT INTO course_tags (tagID , courseID) values (?,?)";
@@ -157,14 +148,3 @@ class courseModel {
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 }
-
-    
-   
-
-    // public function courseByCategory(){
-
-    // }
-
-    // public function LastIdCours(){
-        
-    // }
