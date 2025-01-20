@@ -3,7 +3,7 @@
 error_reporting(E_ALL);
 ini_set('display_errors', 1);
 session_start();
-require_once 'vendor/autoload.php';
+// require_once 'vendor/autoload.php';
 require_once "autoloader.php";
 require_once "debuging/debuging.php";
 require_once "config/databaseConnection.php";  
@@ -42,6 +42,7 @@ $controllerRouter->add('GET', '/teacher/dashboard', [teacherController::class, '
 $controllerRouter->add('GET', '/teacher/dashboard/panding', [teacherController::class, 'panding']);
 $controllerRouter->add('GET', '/admin/dashboard', [adminController::class, 'dashboard']);
 $controllerRouter->add('POST', '/teacher/course/addCourse', [courseController::class, 'addCourse']);
+$controllerRouter->add('POST', '/teacher/course/handlMarkdown', [courseController::class, 'handlMarkdown']);
 $controllerRouter->add('POST', '/dashboard/category', [adminController::class, 'addCategory']);
 $controllerRouter->add('POST', '/dashboard/tag', [adminController::class, 'addTag']);
 $controllerRouter->add('POST', '/teacher/course/delete', [courseController::class, 'deleteCourse']);
