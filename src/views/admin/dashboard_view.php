@@ -1,3 +1,9 @@
+
+<?php
+
+$_SESSION["role"] !=="admin" ? header('location: /home/view') : "";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -222,6 +228,20 @@
                             </tr>
                         </thead>
                         <tbody id="userTableBody">
+
+                        <?php foreach($allUsers as $result): ?>
+                            <tr class="bg-gray-200">
+        <th class="py-3 px-4"><?=$result['firstName']?> <?=$result['lastName']?></th>
+        <th class="py-3 px-4"><?=$result['email']?></th>
+        <th class="py-3 px-4"><?=$result['status']?></th>
+        <td class="border py-2 px-4">
+            <form action="/admin/users/changeStatus" method="POST" style="display:inline;">
+                <input type="hidden" name="status" value="deactivate">
+                <input type="hidden" name="userid" value="<?=$result['userID']?>">
+            </form>
+        </td>
+    </tr>
+    <?php endforeach;?>
                           
                         </tbody>
                     </table>
