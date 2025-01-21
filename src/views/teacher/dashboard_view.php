@@ -15,6 +15,7 @@ if (!is_array($courses)) {
     <title>Teacher Dashboard - Youdemy</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
@@ -203,7 +204,7 @@ if (!is_array($courses)) {
             <?php else: ?>
                 <div class="col-span-full text-center py-8">
                     <p class="text-gray-600">No courses available.</p>
-                </div>src
+                </div>
             <?php endif; ?>
         </div>
 
@@ -213,20 +214,16 @@ if (!is_array($courses)) {
             </ul>
             <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4" onclick="hidePlaylist()">Close Playlist</button>
         </div>
-        <div id="frame-player" class="hidden fixed inset-0 w-full h-full bg-black bg-opacity-75 z-50 flex items-center justify-center">
+        <div id="frame-player" class="hidden fixed inset-0 w-full h-[] bg-black bg-opacity-75 z-50 flex items-center justify-center">
             <div class="relative w-full h-full max-w-6xl mx-auto p-4 flex flex-col items-center justify-center">
-                <button class="absolute top-4 right-4 text-white hover:text-gray-300 text-xl" onclick="hideDoc()()">
+                <button class="absolute top-4 right-0 text-white hover:text-gray-300 text-xl" onclick="hideDoc()">
                     <i class="fas fa-times"></i>
                 </button>
-                <div class="bg-white rounded-lg shadow-lg p-4">
-                            <iframe id="doc-iframe"
-                                src=""
-                                class="w-full h-screen"
-                                type="application/pdf">
-                            </iframe>
-                </div>
-            </div>
+            <div class="bg-white rounded-lg shadow-lg p-4 w-full h-screen overflow-auto">
+            <iframe id="doc-iframe" class="w-full h-full"></iframe>
         </div>
+    </div>
+</div>
         <div id="video-player" class="hidden fixed inset-0 w-full h-full bg-black bg-opacity-75 z-50 flex items-center justify-center">
             <div class="relative w-full h-full max-w-6xl mx-auto p-4 flex flex-col items-center justify-center">
                 <button class="absolute top-4 right-4 text-white hover:text-gray-300 text-xl" onclick="hideVideo()">
@@ -310,25 +307,31 @@ if (!is_array($courses)) {
             });
         });
 
-        function showVideo(contentType,videoSrc) {
-
-            if(contentType === "video"){
-                const videoPlayer = document.getElementById('video-iframe');
-                videoPlayer.querySelector('source').src = videoSrc;
-                videoPlayer.load();
-                document.getElementById('video-player').classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-                
-                document.addEventListener('keydown', closeVideoOnEsc);
-
-            }else{
-                docPlayer = document.getElementById('doc-iframe');
-                docPlayer.src = videoSrc;
-                document.getElementById('frame-player').classList.remove('hidden');
-                document.body.style.overflow = 'hidden';
-                
-                document.addEventListener('keydown', closeVideoOnEsc);
-            }            
+        function showVideo(contentType, videoSrc) {
+        if (contentType === "video") {
+            const videoPlayer = document.getElementById('video-iframe');
+            videoPlayer.querySelector('source').src = videoSrc;
+            videoPlayer.load();
+            document.getElementById('video-player').classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+            document.addEventListener('keydown', closeVideoOnEsc);
+        } else if (contentType === "document") {
+            fetch(videoSrc)
+                .then(response => response.text())
+                .then(markdown => {
+                    const htmlContent = marked.parse(markdown);
+                    const docPlayer = document.getElementById('doc-iframe');
+                    docPlayer.srcdoc = `<html><body>${htmlContent}</body></html>`;
+                    document.getElementById('frame-player').classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                    document.addEventListener('keydown', closeVideoOnEsc);
+                })
+                .catch(error => {
+                    console.error('Failed to load Markdown file:', error);
+                    alert('Failed to load Markdown file.');
+                });
+        }
+    
         }
 
         function hideVideo() {
