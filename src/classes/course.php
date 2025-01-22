@@ -8,12 +8,14 @@ class course {
     private $content;
 
     private $categoryId;
+    private $type;
 
-    function __construct($title, $description, $content, $categoryId) {
+    function __construct($title, $description, $content, $categoryId,$type) {
         $this->title = $title;
         $this->description = $description;
         $this->content = $content;
         $this->categoryId = $categoryId;
+        $this->type = $type;
     }
 
     public function __get($name){
