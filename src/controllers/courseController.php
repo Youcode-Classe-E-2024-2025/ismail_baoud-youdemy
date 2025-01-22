@@ -7,28 +7,23 @@ use src\modeles\documentModel;
 
 class courseController{
     public function addCourse(){
-        $title = htmlspecialchars(trim($_POST["title"]));
-        $description = htmlspecialchars(trim($_POST["description"]));
-        $tags = $_POST["tags"];
-        $category = htmlspecialchars(trim($_POST["category"]));
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-        if($_POST["content_type"] === "video"){
+            $title = htmlspecialchars(trim($_POST["title"]));
+            $description = htmlspecialchars(trim($_POST["description"]));
+            $tags = $_POST["tags"];
+            $category = htmlspecialchars(trim($_POST["category"]));
             
-            $targetDir = "uploads/";
-            if (!is_dir($targetDir)) {
-                if (!mkdir($targetDir, 0777, true)) {
-                    error_log("Failed to create uploads directory");
-                    echo "Failed to create uploads directory";
-                    return;
+            if($_POST["content_type"] === "video"){
+            
+                $targetDir = "uploads/";
+                if (!is_dir($targetDir)) {
+                    if (!mkdir($targetDir, 0777, true)) {
+                        return;
+                    }
+                    chmod($targetDir, 0777);
                 }
-                chmod($targetDir, 0777);
-            }
-            
-            error_log("POST data: " . print_r($_POST, true));
-            error_log("FILES data: " . print_r($_FILES, true));
             
             if (!isset($_FILES['content']) || empty($_FILES['content'])) {
-                echo "No file was uploaded or the upload failed.";
                 return;
             }
             
@@ -39,23 +34,23 @@ class courseController{
             
             $allowedTypes = ['video/mp4', 'video/mov', 'video/avi'];
             if (!in_array($videoFile['type'], $allowedTypes)) {
-                echo  "Only MP4, MOV, and AVI files are allowed.";
                 $uploadOk = 0;
             }
             
             if ($uploadOk && move_uploaded_file($videoFile['tmp_name'], $targetFilePath)) {
                 $id = $_SESSION["teacherID"];
-                $obj = new course($title,$description,$targetFilePath,$category);
-                $objet = new videoModel();
-                $obje = new courseModel();
-                $stmt = $objet->courseAdd($obj,$id);
+                $type = "video";
+                $obj = new course($title,$description,$targetFilePath,$category,$type);
+                $video = new videoModel();
+                $course = new courseModel();
+                $stmt = $video->courseAdd($obj,$id);
                     foreach($tags as $tag){
-                       $obje->course_tags($tag,$stmt);
+                       $course->course_tags($tag,$stmt);
                     }
                 if ($stmt){
                     header('location: /teacher/dashboard');
                 } else {
-                    echo "Failed to save video to database: " . $stmt->error;
+                    $err = "Failed to save video to database: " . $stmt->error;
                 }
             } else {
                 $err =  "Error uploading the video.";
@@ -80,8 +75,8 @@ class courseController{
             $filename = $uploadsDir . $timestamp . '_content.md';
             
             $mdFilePath = $filename;
-            
-            $obj = new course($title,$description,$mdFilePath,$category);
+            $type = "video";
+            $obj = new course($title,$description,$mdFilePath,$category,$type);
             $objet = new documentModel();
             $obje = new courseModel();
             $stmt = $objet->courseAdd($obj,$id);
@@ -92,13 +87,15 @@ class courseController{
             if ($stmt){
                 header('location: /teacher/dashboard');
             } else {
-                echo "Failed to save video to database: " . $stmt->error;
+                $err = "Failed to save video to database: " . $stmt->error;
             }
         }
     }
 }
     
 }
+
+
     
     public function deleteCourse(){
         if($_SERVER["REQUEST_METHOD"] == "POST"){
