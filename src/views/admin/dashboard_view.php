@@ -32,8 +32,8 @@ $_SESSION["role"] !=="admin" ? header('location: /home/view') : "";
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mb-8">
             <div class="bg-gradient-to-r from-blue-400 to-blue-600 text-white shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105">
                 <h2 class="font-bold text-2xl mb-2">User Management</h2>
-                <p class="text-lg mb-2">Total Users: <span class="font-bold">150</span></p>
-                <p class="text-lg mb-2">Pending Signups: <span class="font-bold">10</span></p>
+                <p class="text-lg mb-2">Total Users: <span class="font-bold"><?=$usersN?></span></p>
+                <p class="text-lg mb-2">Pending Signups: <span class="font-bold"><?=$pandingN?></span></p>
                 <div class="mt-4 flex flex-wrap space-x-4">
                     <button class="bg-blue-600 text-white font-bold py-1 px-3 rounded shadow hover:bg-blue-800" onclick="showAllUsers()">All Users</button>
                     <button class="bg-yellow-600 text-white font-bold py-1 px-3 rounded shadow hover:bg-yellow-800" onclick="showPendingUsers()">Pending</button>
@@ -43,9 +43,9 @@ $_SESSION["role"] !=="admin" ? header('location: /home/view') : "";
             </div>
             <div class="bg-gradient-to-r from-green-400 to-green-600 text-white shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105">
                 <h2 class="font-bold text-2xl mb-2">Content Management</h2>
-                <p class="text-lg mb-2">Total Courses: <span class="font-bold">100</span></p>
-                <p class="text-lg mb-2">Total Categories: <span class="font-bold">15</span></p>
-                <p class="text-lg mb-2">Total Tags: <span class="font-bold">50</span></p>
+                <p class="text-lg mb-2">Total Courses: <span class="font-bold"><?=$totalCourses?></span></p>
+                <p class="text-lg mb-2">Total Categories: <span class="font-bold"><?=$totalCategory?></span></p>
+                <p class="text-lg mb-2">Total Tags: <span class="font-bold"><?=$totalTags?></span></p>
                 <div class="mt-4">
                     <button class="bg-white text-green-600 font-bold py-2 px-4 rounded shadow hover:bg-gray-200 mb-2" onclick="manageContent()">Manage Content</button>
                     <button class="bg-white text-indigo-600 font-bold py-2 px-4 rounded shadow hover:bg-gray-200" onclick="bulkInsertTags()">Bulk Insert Tags</button>
@@ -53,10 +53,14 @@ $_SESSION["role"] !=="admin" ? header('location: /home/view') : "";
             </div>
             <div class="bg-gradient-to-r from-yellow-400 to-yellow-600 text-white shadow-lg rounded-lg p-6 transition-transform transform hover:scale-105">
                 <h2 class="font-bold text-2xl mb-2">Statistics</h2>
-                <p class="text-lg mb-2">Total Courses: <span class="font-bold">100</span></p>
-                <p class="text-lg mb-2">Top Course: <span class="font-bold">Data Structures and Algorithms</span></p>
-                <p class="text-lg mb-2">Top 3 Teachers: <span class="font-bold">Michael Brown, Sophia Lee, David Kim</span></p>
-                <button class="bg-white text-yellow-600 font-bold py-2 px-4 rounded shadow hover:bg-gray-200" onclick="viewStatistics()">View Statistics</button>
+                <p class="text-lg mb-2">Top Course: <span class="font-bold"><?=$topCourse["title"]?></span></p>
+                <p class="text-lg mb-2">Top 3 Teachers: 
+                    <?php foreach($topteachers as $topteacher):?>
+                <span class="font-bold"><?=$topteacher["firstName"]?> <?=$topteacher["firstName"]?> ,</span>
+                <?php endforeach;?>
+
+            
+            </p>
             </div>
         </div>
 
@@ -123,90 +127,7 @@ $_SESSION["role"] !=="admin" ? header('location: /home/view') : "";
             <button class="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mt-4" onclick="toggleUserTable()">Close</button>
         </div>
 
-        <div id="statistics" class="hidden bg-white shadow-lg rounded-lg p-6 mb-8">
-            <h2 class="font-bold text-2xl mb-4 text-purple-600">Statistics Charts</h2>
-            <div class="grid grid-cols-2 gap-4">
-                <div class="bg-gray-100 p-4 rounded-lg">
-                    <h3 class="font-bold text-lg mb-2">Course Distribution</h3>
-                    <canvas id="courseDistributionChart" width="400" height="200"></canvas>
-                    <script>
-                        var ctx = document.getElementById('courseDistributionChart').getContext('2d');
-                        var chart = new Chart(ctx, {
-                            type: 'bar',
-                            data: {
-                                labels: ['Course 1', 'Course 2', 'Course 3', 'Course 4', 'Course 5'],
-                                datasets: [{
-                                    label: 'Course Distribution',
-                                    data: [10, 20, 15, 30, 25],
-                                    backgroundColor: [
-                                        'rgba(255, 99, 132, 0.2)',
-                                        'rgba(54, 162, 235, 0.2)',
-                                        'rgba(255, 206, 86, 0.2)',
-                                        'rgba(75, 192, 192, 0.2)',
-                                        'rgba(153, 102, 255, 0.2)'
-                                    ],
-                                    borderColor: [
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)',
-                                        'rgba(75, 192, 192, 1)',
-                                        'rgba(153, 102, 255, 1)'
-                                    ],
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero: true
-                                        }
-                                    }]
-                                }
-                            }
-                        });
-                    </script>
-                </div>
-                <div class="bg-gray-100 p-4 rounded-lg">
-                    <h3 class="font-bold text-lg mb-2">Top Teachers</h3>
-                    <canvas id="topTeachersChart" width="400" height="200"></canvas>
-                    <script>
-                        var ctx = document.getElementById('topTeachersChart').getContext('2d');
-                        var chart = new Chart(ctx, {
-                            type: 'pie',
-                            data: {
-                                labels: ['Michael Brown', 'Sophia Lee', 'David Kim'],
-                                datasets: [{
-                                    label: 'Top Teachers',
-                                    data: [30, 20, 50],
-                                    backgroundColor: [
-                                        'rgba(255, 99, 132, 0.2)',
-                                        'rgba(54, 162, 235, 0.2)',
-                                        'rgba(255, 206, 86, 0.2)'
-                                    ],
-                                    borderColor: [
-                                        'rgba(255, 99, 132, 1)',
-                                        'rgba(54, 162, 235, 1)',
-                                        'rgba(255, 206, 86, 1)'
-                                    ],
-                                    borderWidth: 1
-                                }]
-                            },
-                            options: {
-                                scales: {
-                                    yAxes: [{
-                                        ticks: {
-                                            beginAtZero: true
-                                        }
-                                    }]
-                                }
-                            }
-                        });
-                    </script>
-                </div>
-            </div>
-            <button class="bg-gray-600 hover:bg-gray-800 text-white font-bold py-2 px-4 rounded mt-4" onclick="toggleStatistics()">Close</button>
-        </div>
+       
 
         <script>
             function toggleUserTable() {

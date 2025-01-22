@@ -47,12 +47,29 @@ class userModel{
             
             
     }
-    public function emailExists($db){
-        $query = "select email from users where email = :email";
-        $stmt = $db->prepare( $query );
-        $stmt->bindparam( ':email', $this->email );
+
+    public function allUsers(){
+        $query = "SELECT * from users";
+        $stmt = $this->db->prepare($query);
         $stmt->execute();
-        $isExist = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+
+    
+    public function CountallUsers(){
+        $query = "SELECT count(*) from users";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+
+    public function emailExists($email){
+        $query = "select email from users where email = :email";
+        $stmt = $this->db->prepare( $query );
+        $stmt->bindparam( ':email', $email );
+        $stmt->execute();
+        $isExist = $stmt->fetch();
         if($isExist){
             return true;
         }else{
@@ -60,6 +77,8 @@ class userModel{
         }
 
     }
+
+
 
 }
 

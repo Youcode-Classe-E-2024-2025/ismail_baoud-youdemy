@@ -51,7 +51,6 @@ $_SESSION["role"] !=="student" ? header('location: /home/view') : "";
                     </div>
                     <div class="mt-2 flex justify-between items-center">
                         <input type="text" class="hidden" >
-                        <span class="text-gray-500">Followers: 0</span>
                         <form action="/student/dashboard/enrollement" method="POST">
                             <input type="text" class="hidden" name="courseID" value="<?=$course["courseID"]?>">
                             <input type="text" class="hidden" name="studentID" value="<?=$_SESSION["studentid"]?>">
@@ -66,10 +65,6 @@ $_SESSION["role"] !=="student" ? header('location: /home/view') : "";
         </div>
         
 
-        <div class="mt-6 flex justify-center">
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2 disabled">Previous</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ml-2">Next</button>
-        </div>
 
     </main>
 

@@ -11,10 +11,6 @@ class studentModel{
     public function __construct(){
         $this->db = DatabaseConnection::connect();
     }
-
-    public function myCourses() {
-        
-    }
 }
 
 

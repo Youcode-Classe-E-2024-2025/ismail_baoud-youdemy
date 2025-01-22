@@ -1,6 +1,6 @@
 <?php
 
-$_SESSION["role"] !=="student" ? header('location: home/view') : "";
+$_SESSION["role"] !=="panding" ? header('location: home/view') : "";
 
 ?>
 <!DOCTYPE html>

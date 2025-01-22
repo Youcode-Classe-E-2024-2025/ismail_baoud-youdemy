@@ -25,6 +25,14 @@ class tagModel {
         }
         
     }
+
+    public function totalTags(){
+        $query = "SELECT count(*) from tags";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
+
     public function tagDelete($id) {
         $query = "UPDATE tags set status = 'deactive' where tagID = $id";
         $stmt = $this->db->prepare($query);

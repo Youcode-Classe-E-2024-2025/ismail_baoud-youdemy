@@ -25,10 +25,17 @@ class categoryModel {
         }
         
     }
+
     public function categoryDelete($id) {
         $query = "UPDATE categorys set status = 'deactivate' where categoryID = $id";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
+    }
+    public function totalCategory(){
+        $query = "SELECT count(*) from categorys";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchColumn();
     }
     public function categoryList() {
         $query = "SELECT * from categorys where status = 'active";

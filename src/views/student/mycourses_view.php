@@ -8,6 +8,7 @@ $_SESSION["role"] !== "student" ? header('location: /home/view') : "";
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Youdemy Home</title>
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
 
 </head>
@@ -42,7 +43,7 @@ $_SESSION["role"] !== "student" ? header('location: /home/view') : "";
                         <h2 class="font-bold text-lg mb-2"><?php echo htmlspecialchars($course['title'] ?? '');   ?></h2>
                         <p class="text-gray-600 text-sm mb-4"><?php echo htmlspecialchars($course['description'] ?? 'No description available');  ?></p>
                         <div class="flex justify-center space-x-4 mt-6">
-                            <button class="bg-transparent hover:bg-gray-200 rounded-full p-3" title="View Video" onclick="showVideo('<?php echo'../../../' . htmlspecialchars($course['content'] ?? ''); ?>')">
+                            <button class="bg-transparent hover:bg-gray-200 rounded-full p-3" title="View Video" onclick="showVideo('<?php echo $course['contentType']; ?>' ,' <?php echo'../../../' . htmlspecialchars($course['content'] ?? ''); ?>')">
                                 <i class="fas fa-play-circle text-green-600 text-xl"></i>
                             </button>
                         </div>
@@ -56,10 +57,23 @@ $_SESSION["role"] !== "student" ? header('location: /home/view') : "";
             <?php endif; ?>
         </div>
 
-        <div class="mt-6 flex justify-center">
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2 disabled">Previous</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ml-2">Next</button>
+      
+        <div id="playlist" class="hidden bg-white shadow-lg rounded-lg p-6 max-w-md mx-auto">
+            <h2 class="font-bold text-xl mb-4">Course Playlist</h2>
+            <ul class="list-disc list-inside text-gray-800" id="playlist-content">
+            </ul>
+            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mt-4" onclick="hidePlaylist()">Close Playlist</button>
         </div>
+        <div id="frame-player" class="hidden fixed inset-0 w-full h-[] bg-black bg-opacity-75 z-50 flex items-center justify-center">
+            <div class="relative w-full h-full max-w-6xl mx-auto p-4 flex flex-col items-center justify-center">
+                <button class="absolute top-4 right-0 text-white hover:text-gray-300 text-xl" onclick="hideDoc()">
+                    <i class="fas fa-times"></i>
+                </button>
+            <div class="bg-white rounded-lg shadow-lg p-4 w-full h-screen overflow-auto">
+            <iframe id="doc-iframe" class="w-full h-full"></iframe>
+        </div>
+    </div>
+</div>
         <div id="video-player" class="hidden fixed inset-0 w-full h-full bg-black bg-opacity-75 z-50 flex items-center justify-center">
             <div class="relative w-full h-full max-w-6xl mx-auto p-4 flex flex-col items-center justify-center">
                 <button class="absolute top-4 right-4 text-white hover:text-gray-300 text-xl" onclick="hideVideo()">
@@ -74,21 +88,38 @@ $_SESSION["role"] !== "student" ? header('location: /home/view') : "";
             </div>
         </div>
 
+
     </main>
 
     <script>
        
 
-        function showVideo(videoSrc) {
+        
+       function showVideo(contentType, videoSrc) {
+        if (contentType === "video") {
             const videoPlayer = document.getElementById('video-iframe');
             videoPlayer.querySelector('source').src = videoSrc;
             videoPlayer.load();
             document.getElementById('video-player').classList.remove('hidden');
-            // Prevent body scrolling when video is open
             document.body.style.overflow = 'hidden';
-            
-            // Add event listener for ESC key to close video
             document.addEventListener('keydown', closeVideoOnEsc);
+        } else if (contentType === "document") {
+            fetch(videoSrc)
+                .then(response => response.text())
+                .then(markdown => {
+                    const htmlContent = marked.parse(markdown);
+                    const docPlayer = document.getElementById('doc-iframe');
+                    docPlayer.srcdoc = `<html><body>${htmlContent}</body></html>`;
+                    document.getElementById('frame-player').classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                    document.addEventListener('keydown', closeVideoOnEsc);
+                })
+                .catch(error => {
+                    console.error('Failed to load Markdown file:', error);
+                    alert('Failed to load Markdown file.');
+                });
+        }
+    
         }
 
         function hideVideo() {
@@ -101,6 +132,17 @@ $_SESSION["role"] !== "student" ? header('location: /home/view') : "";
             document.body.style.overflow = 'auto';
             
             // Remove ESC key event listener
+            document.removeEventListener('keydown', closeVideoOnEsc);
+        }
+        function hideDoc() {
+            const videoPlayer = document.getElementById('doc-iframe');
+            
+           
+            videoPlayer.src = '';
+            document.getElementById('frame-player').classList.add('hidden');
+            
+            document.body.style.overflow = 'auto';
+            
             document.removeEventListener('keydown', closeVideoOnEsc);
         }
 

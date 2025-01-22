@@ -37,6 +37,7 @@ $controllerRouter->add('POST', '/controller/signup', [signupController::class, '
 $controllerRouter->add('GET', '/logout', [loginController::class, 'logout']);
 $controllerRouter->add('GET', '/ducyzyducyzyducyzyducyzyducyzy@mailinator.comducyzy@mailinator.com@mailinator.com@mailinator.com@mailinator.com@mailinator.com/dashboard', [studentController::class, 'dashboard']);
 $controllerRouter->add('GET', '/student/mycourses', [studentController::class, 'mycourses']);
+$controllerRouter->add('GET', '/student/dashboard', [studentController::class, 'dashboard']);
 $controllerRouter->add('POST', '/student/dashboard/enrollement', [studentController::class, 'addEnrollement']);
 $controllerRouter->add('GET', '/teacher/dashboard', [teacherController::class, 'dashboard']);
 $controllerRouter->add('GET', '/teacher/dashboard/panding', [teacherController::class, 'panding']);

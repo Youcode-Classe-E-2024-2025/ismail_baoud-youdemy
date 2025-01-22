@@ -46,9 +46,7 @@
                         <span class="bg-gray-100 text-gray-800 text-xs font-medium px-2.5 py-0.5 rounded"><?=$course["categoryName"]?></span>
                     </div>
                     <p class="text-sm text-gray-600">By <?=$course["firstName"]?> <?=$course["lastName"]?></p>
-                    <div class="mt-2">
-                        <span class="text-gray-500">Followers: 150</span>
-                    </div>
+                   
                 </div>
             </div>
         <?php endforeach; ?>
@@ -56,44 +54,24 @@
         <p>Aucun article trouvé.</p>
     <?php endif; ?>
         </div>
-<!-- 
-        <div class="mt-6 flex justify-center items-center">
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2 disabled" disabled>First</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded mr-2 disabled" disabled>Previous</button>
-            <nav class="flex items-center">
-                <ul class="flex space-x-1">
-                    <li><a href="#" class="bg-blue-500 text-white font-bold py-2 px-4 rounded">1</a></li>
-                    <li><a href="#" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">2</a></li>
-                    <li><span class="text-gray-500 font-bold py-2 px-4">...</span></li>
-                    <li><a href="#" class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded">10</a></li>
-                </ul>
-            </nav>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ml-2">Next</button>
-            <button class="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded ml-2">Last</button>
-        </div> -->
         <div class="flex justify-center mt-6">
         <nav class="inline-flex rounded-md shadow-sm">
-        <!-- Previous Page Link -->
         <?php if ($page > 1): ?>
             <a href="?page=<?= $page - 1 ?>" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-l-md hover:bg-gray-50" aria-label="Previous page">Précédent</a>
         <?php else: ?>
             <span class="px-4 py-2 text-sm font-medium text-gray-400 bg-white border border-gray-300 rounded-l-md" aria-disabled="true" aria-label="Previous page">Précédent</span>
         <?php endif; ?>
-                <!-- Page Numbers -->
                 <?php if ($totalPages <= 7): ?>
             <?php for ($i = 1; $i <= $totalPages; $i++): ?>
                 <a href="?page=<?= $i ?>" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 <?= $i == $page ? 'bg-gray-200' : '' ?>" aria-label="Page <?= $i ?>"><?= $i ?></a>
             <?php endfor; ?>
         <?php else: ?>
-            <!-- Show First Page -->
             <a href="?page=1" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 <?= $page == 1 ? 'bg-gray-200' : '' ?>" aria-label="Page 1">1</a>
             
-            <!-- Show Ellipsis if necessary -->
             <?php if ($page > 4): ?>
                 <span class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300">...</span>
             <?php endif; ?>
 
-            <!-- Show Near Pages -->
             <?php 
             $start = max(2, $page - 2);
             $end = min($totalPages - 1, $page + 2);
@@ -101,18 +79,15 @@
                 <a href="?page=<?= $i ?>" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 <?= $i == $page ? 'bg-gray-200' : '' ?>" aria-label="Page <?= $i ?>"><?= $i ?></a>
             <?php endfor; ?>
 
-            <!-- Show Ellipsis if necessary -->
             <?php if ($page < $totalPages - 3): ?>
                 <span class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300">...</span>
             <?php endif; ?>
 
-            <!-- Show Last Page -->
             <a href="?page=<?= $totalPages ?>" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 hover:bg-gray-50 <?= $page == $totalPages ? 'bg-gray-200' : '' ?>" aria-label="Page <?= $totalPages ?>"><?= $totalPages ?></a>
         <?php endif; ?>
 
 
 
-        <!-- Next Page Link -->
         <?php if ($page < $totalPages): ?>
             <a href="/home/view?page=<?= $page + 1 ?>" class="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-r-md hover:bg-gray-50" aria-label="Next page">Suivant</a>
         <?php else: ?>

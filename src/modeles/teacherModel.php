@@ -31,6 +31,33 @@ class teacherModel{
         $stmt = $this->db->prepare($query);
         $stmt->execute();
     }
+    public function topTeachers(){
+        $query = "SELECT 
+    u.userID, 
+    u.firstName, 
+    u.lastName, 
+    COUNT(c.courseID) AS course_count
+FROM 
+    users u
+JOIN 
+    courses c ON u.userID = c.teacherID
+WHERE 
+    u.role = 'teacher' 
+GROUP BY 
+    u.userID
+ORDER BY 
+    course_count DESC
+LIMIT 3;";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+    public function CountAllTeachers(){
+        $query = "SELECT count(*) from users where status = 'On hold'";
+        $stmt = $this->db->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchColumn();
+    }
 }
 
 ?>

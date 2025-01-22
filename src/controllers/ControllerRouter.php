@@ -10,11 +10,10 @@ class ControllerRouter {
         $this->routes[] = [
             'path' => $path,
             'method' => strtoupper($method),
-            'controller' => $controller,
-            'middlewares' => []
+            'controller' => $controller
         ];
     }
-    private static function normalizePath(string $path): string {
+    private function normalizePath(string $path): string {
         $path = trim($path, '/');
         $path = "/{$path}/";
         $path = preg_replace('#[/]{2,}#', '/', $path);

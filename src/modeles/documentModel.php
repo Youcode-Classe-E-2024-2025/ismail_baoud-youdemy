@@ -10,7 +10,6 @@ use src\classes\course;
 
 class documentModel extends courseModel{
     private $db;
-    private $type = "document";
     public function __construct(){
         $this->db = DatabaseConnection::connect();
     }
@@ -19,7 +18,7 @@ class documentModel extends courseModel{
         try{
             $query = "INSERT into courses (title,description,content,contentType,categoryId,teacherID) values (?,?,?,?,?,?)";
             $stmt = $this->db->prepare($query);
-            $stmt->execute([$obj->__get("title"),$obj->__get("description"),$obj->__get("content"),$this->type,$obj->__get("categoryId"),$id]);
+            $stmt->execute([$obj->__get("title"),$obj->__get("description"),$obj->__get("content"),$obj->__get("type"),$obj->__get("categoryId"),$id]);
             return $this->db->lastInsertId();
         }catch(exeption $e){
             return false;
