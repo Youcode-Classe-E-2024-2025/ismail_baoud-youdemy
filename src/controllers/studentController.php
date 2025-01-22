@@ -8,7 +8,7 @@ class studentController{
         $tagModel = new tagModel();
         $tags = $tagModel->tagList();
         $courseModel = new courseModel();
-        $courses = $courseModel->courseList();
+        $courses = $courseModel->allCourseList();
         
         include_once  "src/views/student/dashboard_view.php";
     }
