@@ -34,6 +34,13 @@ class signupController
                 return;
                 
             }
+            $obg = new userModel();
+            $result = $obg->emailExists($email);
+            $emailexists = false;
+            if($result){
+                $emailexists = true;
+            }
+            if(!$emailexists){
             if ($role == "student") {
                 $status = "active";
                 $student = new User($firstName, $lastName, $email, $password, $phoneNumber, $role, $status);
@@ -49,6 +56,9 @@ class signupController
                 $err = "this role is not found";
                 return;
             }
+        }else{
+            header('location: /signup');
+        }
 
         }
     }
