@@ -24,7 +24,6 @@ class courseModel {
             return false;
         }
     }
-
     public function courseDelete($id){
         $query = "UPDATE courses set status = 'deactivate' where courseID =$id";
         $stmt = $this->db->prepare($query);

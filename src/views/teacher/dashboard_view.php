@@ -30,8 +30,7 @@ if (!is_array($courses)) {
         <div class="container mx-auto flex justify-between items-center">
             <a href="/" class="text-2xl font-bold text-gray-800">Youdemy</a>
             <div id="id" class="space-x-6">
-                <a href="/teacher/dashboard" class="text-gray-700 hover:text-blue-500">Dashboard</a>
-                <a href="/teacher/manage-courses" class="text-gray-700 hover:text-blue-500">Manage Courses</a>
+                <a href="/teacher/dashboard" class="text-gray-700 hover:text-blue-500">Manage Courses</a>
                 <a href="/teacher/add-course" class="text-gray-700 hover:text-blue-500">Add New Course</a>
                 <a href="/teacher/statistics" class="text-gray-700 hover:text-blue-500">Statistics</b>
                 <a href="/home/view" class="text-gray-700 hover:text-blue-500">Logout</a>
@@ -116,9 +115,10 @@ if (!is_array($courses)) {
                     <label for="course-category" class="block text-gray-700 text-sm font-bold mb-2">Category:</label>
                     <select id="course-category" name="category" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
                         <option>Select category</option>
-                        <option value="1">Category A</option>
-                        <option value="2">Category B</option>
-                        <option value="3">Category C</option>
+                        <?php foreach($categories as $categorie):?>
+                         <option value="<?=$categorie['categoryID']?>"><?=$categorie['categoryName']?></option>
+                        <?php endforeach; ?>
+
                     </select>
                 </div>
                 <div class="flex justify-end">
@@ -129,7 +129,7 @@ if (!is_array($courses)) {
             </form>
         </div>
 
-        <div id="manage-courses" class="hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div id="dashboard" class="hidden grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             <?php if (!empty($courses)):  ?>
                 <?php foreach ($courses as $course): $_SESSION["content"] = $course["contentType"] ;?>
                 <div class="bg-white shadow-lg rounded-lg overflow-hidden cursor-pointer mb-4">

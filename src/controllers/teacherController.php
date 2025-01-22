@@ -14,6 +14,8 @@ class teacherController{
         $objet = new tagModel();
         $tags = $objet->tagList();
         $obj = new courseModel();
+        $category = new categoryModel();
+        $categories = $category->categoryList();
         $id = $_SESSION["teacherID"];
         $results = $obj->courseList($id);
         $countCourses = $obj->totalCourses(); 

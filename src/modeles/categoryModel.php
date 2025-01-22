@@ -38,7 +38,7 @@ class categoryModel {
         return $stmt->fetchColumn();
     }
     public function categoryList() {
-        $query = "SELECT * from categorys where status = 'active";
+        $query = "SELECT * from categorys where status = 'active'";
         $stmt = $this->db->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
